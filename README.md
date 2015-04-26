@@ -1,2 +1,3 @@
-# divider-item-decoration
-A divider for Android's RecyclerView using RecyclerView.ItemDecoration
+# simple-item-decoration
+
+A simple library for adding dividers and offsets to Android's RecyclerView using RecyclerView.ItemDecoration
