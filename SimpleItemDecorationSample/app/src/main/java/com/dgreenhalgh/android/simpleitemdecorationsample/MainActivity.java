@@ -1,39 +1,59 @@
 package com.dgreenhalgh.android.simpleitemdecorationsample;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import com.dgreenhalgh.android.simpleitemdecoration.DividerItemDecoration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends Activity {
+
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.activity_main_recyclerView);
+        initRecyclerView();
     }
 
+    private void initRecyclerView() {
+        List<String> sampleStringList = getSampleData();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(new SimpleItemDecorationSampleListAdapter(sampleStringList));
+
+        addDividers();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private void addDividers() {
+        Drawable dividerDrawable = getResources().getDrawable(R.drawable.divider_sample);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(dividerDrawable));
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    private List<String> getSampleData() {
+        List<String> sampleStringList = new ArrayList<>();
+        sampleStringList.add("Paul");
+        sampleStringList.add("David");
+        sampleStringList.add("Kristin");
+        sampleStringList.add("Chris");
+        sampleStringList.add("Josh");
+        sampleStringList.add("Andrew");
+        sampleStringList.add("Brian");
+        sampleStringList.add("Matt");
+        sampleStringList.add("Bill");
+        sampleStringList.add("Jason");
+        sampleStringList.add("Bolot");
+        sampleStringList.add("Sean");
 
-        return super.onOptionsItemSelected(item);
+        return sampleStringList;
     }
 }

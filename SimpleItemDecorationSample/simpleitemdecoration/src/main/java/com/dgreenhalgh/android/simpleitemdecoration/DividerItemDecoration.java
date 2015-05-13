@@ -11,6 +11,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable mDivider;
     private boolean mRecyclerViewIsLinear;
+    private int mOrientation;
 
     private Drawable mHorizontalDivider;
     private Drawable mVerticalDivider;
@@ -42,8 +43,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
-        mRecyclerViewIsLinear = parent.getLayoutManager() instanceof LinearLayoutManager;
-        if(mRecyclerViewIsLinear) {
+        if (mRecyclerViewIsLinear) {
             drawLinearDividers(canvas, parent);
         } else {
             drawGridDividers(canvas, parent);
@@ -54,11 +54,19 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 
-        if(!mRecyclerViewIsLinear) {
+        mRecyclerViewIsLinear = parent.getLayoutManager() instanceof LinearLayoutManager;
+        if (mRecyclerViewIsLinear) {
+            mOrientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
+            if (mOrientation == LinearLayoutManager.HORIZONTAL) {
+                outRect.left = mDivider.getIntrinsicWidth();
+            } else if (mOrientation == LinearLayoutManager.VERTICAL) {
+                outRect.top = mDivider.getIntrinsicHeight();
+            }
+
             return;
         }
 
-        boolean childIsInLeftmostColumn = (parent.getChildPosition(view) % mNumColumns) == 0;
+        boolean childIsInLeftmostColumn = (parent.getChildAdapterPosition(view) % mNumColumns) == 0;
         if(!childIsInLeftmostColumn) {
             outRect.left = mHorizontalDivider.getIntrinsicWidth();
         }
@@ -67,10 +75,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void drawLinearDividers(Canvas canvas, RecyclerView parent) {
-        int recyclerViewOrientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
-        if(recyclerViewOrientation == LinearLayoutManager.HORIZONTAL) {
+        if (mOrientation == LinearLayoutManager.HORIZONTAL) {
             drawHorizontalDividers(canvas, parent);
-        } else if(recyclerViewOrientation == LinearLayoutManager.VERTICAL) {
+        } else if (mOrientation == LinearLayoutManager.VERTICAL) {
             drawVerticalDividers(canvas, parent);
         }
     }
@@ -106,7 +113,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int parentRight = parent.getWidth() - parent.getPaddingRight();
 
         int childCount = parent.getChildCount();
-        for(int i = 0; i < childCount; i++) {
+        for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
 
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
@@ -133,9 +140,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int parentBottom = parent.getHeight() - parent.getPaddingBottom();
 
         int childCount = parent.getChildCount();
-        for(int i = 0; i < childCount; i++) {
+        for (int i = 0; i < childCount; i++) {
             boolean childIsInLastColumn = (i + 1) % mNumColumns == 0;
-            if(!childIsInLastColumn) {
+            if (!childIsInLastColumn) {
                 View child = parent.getChildAt(i);
 
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
@@ -160,7 +167,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int childCount = parent.getChildCount();
         int numChildrenOnLastRow = childCount % mNumColumns;
         int childCountMinusLastRow = childCount - numChildrenOnLastRow;
-        for(int i = 0; i < childCountMinusLastRow; i++) {
+        for (int i = 0; i < childCountMinusLastRow; i++) {
             View child = parent.getChildAt(i);
 
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
