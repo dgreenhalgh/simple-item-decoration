@@ -11,6 +11,7 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 
     private Button mLinearLayoutManagerSampleButton;
+    private Button mGridLayoutManagerSampleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,9 @@ public class MainActivity extends Activity {
 
         mLinearLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_linearLayoutManagerButton);
         mLinearLayoutManagerSampleButton.setOnClickListener(mLinearLayoutManagerSampleButtonClickListener);
+
+        mGridLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_gridLayoutManagerButton);
+        mGridLayoutManagerSampleButton.setOnClickListener(mGridLayoutManagerSampleButtonClickListener);
     }
 
     private View.OnClickListener mLinearLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
@@ -28,6 +32,16 @@ public class MainActivity extends Activity {
 
             Intent linearLayoutManagerSampleIntent = LinearLayoutManagerSampleActivity.newIntent(context);
             context.startActivity(linearLayoutManagerSampleIntent);
+        }
+    };
+
+    private View.OnClickListener mGridLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Context context = view.getContext();
+
+            Intent gridLayoutManagerSampleIntent = GridLayoutManagerSampleActivity.newIntent(context);
+            context.startActivity(gridLayoutManagerSampleIntent);
         }
     };
 }
