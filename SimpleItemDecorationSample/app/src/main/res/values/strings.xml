@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">SimpleItemDecorationSample</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <!-- MainActivity -->
+    <string name="activity_main_samplesHeader">Samples</string>
+    <string name="activity_main_keyHeader">Key</string>
+    <string name="activity_main_verticalLinearLayoutManagerButtonText">Vertical LinearLayoutManager</string>
+    <string name="activity_main_horizontalLinearLayoutManagerButtonText">Horizontal LinearLayoutManager</string>
+    <string name="activity_main_gridLayoutManagerButtonText">GridLayoutManager</string>
+
+    <!-- Sample Activities -->
+    <string name="activity_vertical_linear_layout_manager_sample_dividerCheckBoxText">Dividers</string>
+    <string name="activity_horizontal_linear_layout_manager_sample_dividerCheckBoxText">Dividers</string>
+    <string name="activity_grid_layout_manager_sample_dividerCheckBoxText">Dividers</string>
+
 </resources>

@@ -1,59 +1,61 @@
 package com.dgreenhalgh.android.simpleitemdecorationsample;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
-import com.dgreenhalgh.android.simpleitemdecoration.DividerItemDecoration;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends Activity {
 
-    private RecyclerView mRecyclerView;
+    private Button mVerticalLinearLayoutManagerSampleButton;
+    private Button mHorizontalLinearLayoutManagerSampleButton;
+    private Button mGridLayoutManagerSampleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.activity_main_recyclerView);
-        initRecyclerView();
+        mVerticalLinearLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_verticalLinearLayoutManagerButton);
+        mVerticalLinearLayoutManagerSampleButton.setOnClickListener(mVerticalLinearLayoutManagerSampleButtonClickListener);
+
+        mHorizontalLinearLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_horizontalLinearLayoutManagerButton);
+        mHorizontalLinearLayoutManagerSampleButton.setOnClickListener(mHorizontalLinearLayoutManagerSampleButtonClickListener);
+
+        mGridLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_gridLayoutManagerButton);
+        mGridLayoutManagerSampleButton.setOnClickListener(mGridLayoutManagerSampleButtonClickListener);
     }
 
-    private void initRecyclerView() {
-        List<String> sampleStringList = getSampleData();
+    private View.OnClickListener mVerticalLinearLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Context context = view.getContext();
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new SimpleItemDecorationSampleListAdapter(sampleStringList));
+            Intent verticalLinearLayoutManagerSampleIntent = VerticalLinearLayoutManagerSampleActivity.newIntent(context);
+            context.startActivity(verticalLinearLayoutManagerSampleIntent);
+        }
+    };
 
-        addDividers();
-    }
+    private View.OnClickListener mHorizontalLinearLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Context context = view.getContext();
 
-    private void addDividers() {
-        Drawable dividerDrawable = getResources().getDrawable(R.drawable.divider_sample);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(dividerDrawable));
-    }
+            Intent horizontalLinearLayoutManagerSampleIntent = HorizontalLinearLayoutManagerSampleActivity.newIntent(context);
+            context.startActivity(horizontalLinearLayoutManagerSampleIntent);
+        }
+    };
 
-    private List<String> getSampleData() {
-        List<String> sampleStringList = new ArrayList<>();
-        sampleStringList.add("Paul");
-        sampleStringList.add("David");
-        sampleStringList.add("Kristin");
-        sampleStringList.add("Chris");
-        sampleStringList.add("Josh");
-        sampleStringList.add("Andrew");
-        sampleStringList.add("Brian");
-        sampleStringList.add("Matt");
-        sampleStringList.add("Bill");
-        sampleStringList.add("Jason");
-        sampleStringList.add("Bolot");
-        sampleStringList.add("Sean");
+    private View.OnClickListener mGridLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Context context = view.getContext();
 
-        return sampleStringList;
-    }
+            Intent gridLayoutManagerSampleIntent = GridLayoutManagerSampleActivity.newIntent(context);
+            context.startActivity(gridLayoutManagerSampleIntent);
+        }
+    };
 }
