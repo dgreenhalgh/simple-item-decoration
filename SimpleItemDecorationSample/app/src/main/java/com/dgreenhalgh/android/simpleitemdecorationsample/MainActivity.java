@@ -10,7 +10,8 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-    private Button mLinearLayoutManagerSampleButton;
+    private Button mVerticalLinearLayoutManagerSampleButton;
+    private Button mHorizontalLinearLayoutManagerSampleButton;
     private Button mGridLayoutManagerSampleButton;
 
     @Override
@@ -18,20 +19,33 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mLinearLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_linearLayoutManagerButton);
-        mLinearLayoutManagerSampleButton.setOnClickListener(mLinearLayoutManagerSampleButtonClickListener);
+        mVerticalLinearLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_verticalLinearLayoutManagerButton);
+        mVerticalLinearLayoutManagerSampleButton.setOnClickListener(mVerticalLinearLayoutManagerSampleButtonClickListener);
+
+        mHorizontalLinearLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_horizontalLinearLayoutManagerButton);
+        mHorizontalLinearLayoutManagerSampleButton.setOnClickListener(mHorizontalLinearLayoutManagerSampleButtonClickListener);
 
         mGridLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_gridLayoutManagerButton);
         mGridLayoutManagerSampleButton.setOnClickListener(mGridLayoutManagerSampleButtonClickListener);
     }
 
-    private View.OnClickListener mLinearLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
+    private View.OnClickListener mVerticalLinearLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Context context = view.getContext();
 
-            Intent linearLayoutManagerSampleIntent = LinearLayoutManagerSampleActivity.newIntent(context);
-            context.startActivity(linearLayoutManagerSampleIntent);
+            Intent verticalLinearLayoutManagerSampleIntent = VerticalLinearLayoutManagerSampleActivity.newIntent(context);
+            context.startActivity(verticalLinearLayoutManagerSampleIntent);
+        }
+    };
+
+    private View.OnClickListener mHorizontalLinearLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Context context = view.getContext();
+
+            Intent horizontalLinearLayoutManagerSampleIntent = HorizontalLinearLayoutManagerSampleActivity.newIntent(context);
+            context.startActivity(horizontalLinearLayoutManagerSampleIntent);
         }
     };
 

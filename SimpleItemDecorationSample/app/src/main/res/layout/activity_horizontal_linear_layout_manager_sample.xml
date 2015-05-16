@@ -5,13 +5,13 @@
     android:orientation="vertical">
 
     <CheckBox
-        android:id="@+id/activity_grid_layout_manager_sample_dividersCheckBox"
+        android:id="@+id/activity_horizontal_linear_layout_manager_sample_dividersCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/activity_vertical_linear_layout_manager_sample_dividerCheckBoxText"/>
+        android:text="@string/activity_horizontal_linear_layout_manager_sample_dividerCheckBoxText"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_grid_layout_manager_sample_recyclerView"
+        android:id="@+id/activity_horizontal_linear_layout_manager_sample_recyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

@@ -11,10 +11,16 @@
         android:text="@string/activity_main_samplesHeader"/>
 
     <Button
-        android:id="@+id/activity_main_linearLayoutManagerButton"
+        android:id="@+id/activity_main_verticalLinearLayoutManagerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/activity_main_linearLayoutManagerButtonText"/>
+        android:text="@string/activity_main_verticalLinearLayoutManagerButtonText"/>
+
+    <Button
+        android:id="@+id/activity_main_horizontalLinearLayoutManagerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_main_horizontalLinearLayoutManagerButtonText"/>
 
     <Button
         android:id="@+id/activity_main_gridLayoutManagerButton"

@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LinearLayoutManagerSampleActivity extends Activity {
+public class HorizontalLinearLayoutManagerSampleActivity extends Activity {
 
     private CheckBox mDividersCheckBox;
     private RecyclerView mRecyclerView;
@@ -25,18 +28,18 @@ public class LinearLayoutManagerSampleActivity extends Activity {
     private boolean mDividersVisible;
 
     public static Intent newIntent(Context context) {
-        return new Intent(context, LinearLayoutManagerSampleActivity.class);
+        return new Intent(context, HorizontalLinearLayoutManagerSampleActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_linear_layout_manager_sample);
+        setContentView(R.layout.activity_horizontal_linear_layout_manager_sample);
 
-        mDividersCheckBox = (CheckBox) findViewById(R.id.activity_linear_layout_manager_sample_dividersCheckBox);
+        mDividersCheckBox = (CheckBox) findViewById(R.id.activity_horizontal_linear_layout_manager_sample_dividersCheckBox);
         mDividersCheckBox.setOnCheckedChangeListener(mDividersCheckBoxCheckedChangeListener);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.activity_linear_layout_manager_sample_recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.activity_horizontal_linear_layout_manager_sample_recyclerView);
         initRecyclerView();
     }
 
@@ -50,7 +53,7 @@ public class LinearLayoutManagerSampleActivity extends Activity {
     private void initRecyclerView() {
         List<String> sampleStringList = getSampleData();
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setAdapter(new SimpleItemDecorationSampleListAdapter(sampleStringList));
 
         Drawable dividerDrawable = getResources().getDrawable(R.drawable.divider_sample);

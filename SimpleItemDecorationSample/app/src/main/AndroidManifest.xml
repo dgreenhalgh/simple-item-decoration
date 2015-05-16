@@ -14,10 +14,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LinearLayoutManagerSampleActivity" />
-        <activity
-            android:name=".GridLayoutManagerSampleActivity">
-        </activity>
+        <activity android:name=".VerticalLinearLayoutManagerSampleActivity" />
+        <activity android:name=".HorizontalLinearLayoutManagerSampleActivity" />
+        <activity android:name=".GridLayoutManagerSampleActivity" />
     </application>
 
 </manifest>

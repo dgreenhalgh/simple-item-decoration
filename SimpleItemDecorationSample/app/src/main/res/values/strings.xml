@@ -4,11 +4,13 @@
     <!-- MainActivity -->
     <string name="activity_main_samplesHeader">Samples</string>
     <string name="activity_main_keyHeader">Key</string>
-    <string name="activity_main_linearLayoutManagerButtonText">LinearLayoutManager sample</string>
-    <string name="activity_main_gridLayoutManagerButtonText">GridLayoutManager sample</string>
+    <string name="activity_main_verticalLinearLayoutManagerButtonText">Vertical LinearLayoutManager</string>
+    <string name="activity_main_horizontalLinearLayoutManagerButtonText">Horizontal LinearLayoutManager</string>
+    <string name="activity_main_gridLayoutManagerButtonText">GridLayoutManager</string>
 
-    <!-- LinearLayoutManager sample Activity -->
-    <string name="activity_linear_layout_manager_sample_dividerCheckBoxText">Dividers</string>
+    <!-- Sample Activities -->
+    <string name="activity_vertical_linear_layout_manager_sample_dividerCheckBoxText">Dividers</string>
+    <string name="activity_horizontal_linear_layout_manager_sample_dividerCheckBoxText">Dividers</string>
     <string name="activity_grid_layout_manager_sample_dividerCheckBoxText">Dividers</string>
 
 </resources>
