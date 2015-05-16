@@ -1,0 +1,18 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/activity_linear_layout_manager_sample_dividersCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_linear_layout_manager_sample_dividerCheckBoxText"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_linear_layout_manager_sample_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
