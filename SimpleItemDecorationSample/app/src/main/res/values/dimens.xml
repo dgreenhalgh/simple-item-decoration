@@ -4,4 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="activity_main_layout_margin">16dp</dimen>
+
+    <dimen name="start_offset">16dp</dimen>
+
 </resources>

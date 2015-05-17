@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="cyan">#FF00FFFF</color>
-    <color name="red">#FFFF0000</color>
+    <color name="list_item_cyan">#00FFFF</color>
+    <color name="divider_red">#FF0000</color>
 </resources>
