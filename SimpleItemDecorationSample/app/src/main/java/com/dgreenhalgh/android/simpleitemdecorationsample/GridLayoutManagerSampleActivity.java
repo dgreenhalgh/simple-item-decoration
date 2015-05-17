@@ -12,8 +12,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.dgreenhalgh.android.simpleitemdecoration.GridDividerItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.GridEndOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.GridStartOffsetItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.StartOffsetItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +25,16 @@ public class GridLayoutManagerSampleActivity extends Activity {
 
     private CheckBox mDividersCheckBox;
     private CheckBox mStartOffsetCheckBox;
+    private CheckBox mEndOffsetCheckBox;
     private RecyclerView mRecyclerView;
 
     private RecyclerView.ItemDecoration mDividerItemDecoration;
     private RecyclerView.ItemDecoration mStartOffsetItemDecoration;
+    private RecyclerView.ItemDecoration mEndOffsetItemDecoration;
 
     private boolean mDividersVisible;
     private boolean mStartOffsetVisible;
+    private boolean mEndOffsetVisible;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, GridLayoutManagerSampleActivity.class);
@@ -47,6 +50,9 @@ public class GridLayoutManagerSampleActivity extends Activity {
 
         mStartOffsetCheckBox = (CheckBox) findViewById(R.id.activity_grid_layout_manager_sample_startOffsetCheckBox);
         mStartOffsetCheckBox.setOnCheckedChangeListener(mStartOffsetCheckBoxCheckedChangeListener);
+
+        mEndOffsetCheckBox = (CheckBox) findViewById(R.id.activity_grid_layout_manager_sample_endOffsetCheckBox);
+        mEndOffsetCheckBox.setOnCheckedChangeListener(mEndOffsetCheckBoxCheckedChangeListener);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.activity_grid_layout_manager_sample_recyclerView);
         initRecyclerView();
@@ -66,6 +72,13 @@ public class GridLayoutManagerSampleActivity extends Activity {
         }
     };
 
+    private CompoundButton.OnCheckedChangeListener mEndOffsetCheckBoxCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            toggleEndOffsetVisibility();
+        }
+    };
+
     private void initRecyclerView() {
         List<String> sampleStringList = getSampleData();
 
@@ -78,6 +91,9 @@ public class GridLayoutManagerSampleActivity extends Activity {
 
         int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
         mStartOffsetItemDecoration = new GridStartOffsetItemDecoration(startOffsetPx, NUM_COLUMNS);
+
+        int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
+        mEndOffsetItemDecoration = new GridEndOffsetItemDecoration(endOffsetPx, NUM_COLUMNS);
     }
 
     private void toggleDividerVisibility() {
@@ -97,6 +113,16 @@ public class GridLayoutManagerSampleActivity extends Activity {
         } else {
             mRecyclerView.addItemDecoration(mStartOffsetItemDecoration);
             mStartOffsetVisible = true;
+        }
+    }
+
+    private void toggleEndOffsetVisibility() {
+        if (mEndOffsetVisible) {
+            mRecyclerView.removeItemDecoration(mEndOffsetItemDecoration);
+            mEndOffsetVisible = false;
+        } else {
+            mRecyclerView.addItemDecoration(mEndOffsetItemDecoration);
+            mEndOffsetVisible = true;
         }
     }
 
