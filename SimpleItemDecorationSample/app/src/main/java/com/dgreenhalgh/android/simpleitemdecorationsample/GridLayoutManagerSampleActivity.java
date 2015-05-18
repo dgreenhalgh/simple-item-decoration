@@ -80,7 +80,7 @@ public class GridLayoutManagerSampleActivity extends Activity {
     };
 
     private void initRecyclerView() {
-        List<String> sampleStringList = getSampleData();
+        List<String> sampleStringList = SampleDataBank.getSampleData();
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, NUM_COLUMNS));
         mRecyclerView.setAdapter(new SimpleItemDecorationSampleListAdapter(sampleStringList));
@@ -124,23 +124,5 @@ public class GridLayoutManagerSampleActivity extends Activity {
             mRecyclerView.addItemDecoration(mEndOffsetItemDecoration);
             mEndOffsetVisible = true;
         }
-    }
-
-    private List<String> getSampleData() {
-        List<String> sampleStringList = new ArrayList<>();
-        sampleStringList.add("Paul");
-        sampleStringList.add("David");
-        sampleStringList.add("Kristin");
-        sampleStringList.add("Chris");
-        sampleStringList.add("Josh");
-        sampleStringList.add("Andrew");
-        sampleStringList.add("Brian");
-        sampleStringList.add("Matt");
-        sampleStringList.add("Bill");
-        sampleStringList.add("Jason");
-        sampleStringList.add("Bolot");
-        sampleStringList.add("Sean");
-
-        return sampleStringList;
     }
 }
