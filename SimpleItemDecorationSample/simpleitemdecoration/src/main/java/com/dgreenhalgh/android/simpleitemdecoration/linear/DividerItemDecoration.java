@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecoration;
+package com.dgreenhalgh.android.simpleitemdecoration.linear;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;

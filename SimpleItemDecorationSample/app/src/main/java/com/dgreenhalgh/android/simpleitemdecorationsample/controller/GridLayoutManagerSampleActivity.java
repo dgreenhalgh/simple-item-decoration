@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample;
+package com.dgreenhalgh.android.simpleitemdecorationsample.controller;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,17 +6,22 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.dgreenhalgh.android.simpleitemdecoration.DividerItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.EndOffsetItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.StartOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridEndOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridStartOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecorationsample.R;
+import com.dgreenhalgh.android.simpleitemdecorationsample.model.SampleDataBank;
+import com.dgreenhalgh.android.simpleitemdecorationsample.view.DividerControlsView;
 
 import java.util.List;
 
 
-public class HorizontalLinearLayoutManagerSampleActivity extends Activity {
+public class GridLayoutManagerSampleActivity extends Activity {
+
+    private static final int NUM_COLUMNS = 3;
 
     private DividerControlsView mDividerControlsView;
     private RecyclerView mRecyclerView;
@@ -29,36 +34,36 @@ public class HorizontalLinearLayoutManagerSampleActivity extends Activity {
     private boolean mEndOffsetVisible;
 
     public static Intent newIntent(Context context) {
-        return new Intent(context, HorizontalLinearLayoutManagerSampleActivity.class);
+        return new Intent(context, GridLayoutManagerSampleActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_horizontal_linear_layout_manager_sample);
+        setContentView(R.layout.activity_grid_layout_manager_sample);
 
-        mDividerControlsView = (DividerControlsView) findViewById(R.id.activity_horizontal_linear_layout_manager_sample_dividerControlsView);
+        mDividerControlsView = (DividerControlsView) findViewById(R.id.activity_grid_layout_manager_sample_dividerControlsView);
         mDividerControlsView.setOnVisibilityChangeListener(mOnVisibilityChangeListener);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.activity_horizontal_linear_layout_manager_sample_recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.activity_grid_layout_manager_sample_recyclerView);
         initRecyclerView();
     }
 
     private void initRecyclerView() {
         List<String> sampleStringList = SampleDataBank.getSampleData();
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, NUM_COLUMNS));
         mRecyclerView.setAdapter(new SimpleItemDecorationSampleListAdapter(sampleStringList));
 
         Resources resources = getResources();
         Drawable dividerDrawable = resources.getDrawable(R.drawable.divider_sample);
-        mDividerItemDecoration = new DividerItemDecoration(dividerDrawable);
+        mDividerItemDecoration = new GridDividerItemDecoration(dividerDrawable, dividerDrawable, NUM_COLUMNS);
 
         int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
-        mStartOffsetItemDecoration = new StartOffsetItemDecoration(startOffsetPx);
+        mStartOffsetItemDecoration = new GridStartOffsetItemDecoration(startOffsetPx, NUM_COLUMNS);
 
         int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
-        mEndOffsetItemDecoration = new EndOffsetItemDecoration(endOffsetPx);
+        mEndOffsetItemDecoration = new GridEndOffsetItemDecoration(endOffsetPx, NUM_COLUMNS);
     }
 
     private void toggleDividerVisibility() {

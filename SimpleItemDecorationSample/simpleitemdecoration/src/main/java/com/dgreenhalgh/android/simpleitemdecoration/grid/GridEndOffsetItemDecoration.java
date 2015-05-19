@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecoration;
+package com.dgreenhalgh.android.simpleitemdecoration.grid;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

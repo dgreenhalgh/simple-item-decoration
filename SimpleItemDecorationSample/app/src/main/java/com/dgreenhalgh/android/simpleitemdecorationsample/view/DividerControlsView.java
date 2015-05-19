@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample;
+package com.dgreenhalgh.android.simpleitemdecorationsample.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+
+import com.dgreenhalgh.android.simpleitemdecorationsample.R;
 
 public class DividerControlsView extends LinearLayout {
 

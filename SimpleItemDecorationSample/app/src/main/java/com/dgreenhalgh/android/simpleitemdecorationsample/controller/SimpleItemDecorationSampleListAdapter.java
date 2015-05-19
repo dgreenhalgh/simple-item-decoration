@@ -1,9 +1,11 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample;
+package com.dgreenhalgh.android.simpleitemdecorationsample.controller;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.dgreenhalgh.android.simpleitemdecorationsample.R;
 
 import java.util.List;
 

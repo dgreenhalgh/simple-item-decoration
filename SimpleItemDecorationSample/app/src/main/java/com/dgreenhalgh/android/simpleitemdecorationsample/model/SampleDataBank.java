@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample;
+package com.dgreenhalgh.android.simpleitemdecorationsample.model;
 
 import java.util.ArrayList;
 import java.util.List;
