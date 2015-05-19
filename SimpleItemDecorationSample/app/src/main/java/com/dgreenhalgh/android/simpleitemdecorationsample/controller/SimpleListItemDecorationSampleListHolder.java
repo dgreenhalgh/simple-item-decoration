@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample;
+package com.dgreenhalgh.android.simpleitemdecorationsample.controller;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

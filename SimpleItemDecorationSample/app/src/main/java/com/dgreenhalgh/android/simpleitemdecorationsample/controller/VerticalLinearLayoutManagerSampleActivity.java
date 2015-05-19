@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample;
+package com.dgreenhalgh.android.simpleitemdecorationsample.controller;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.EndOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.StartOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecorationsample.R;
+import com.dgreenhalgh.android.simpleitemdecorationsample.model.SampleDataBank;
+import com.dgreenhalgh.android.simpleitemdecorationsample.view.DividerControlsView;
 
 import java.util.List;
 
