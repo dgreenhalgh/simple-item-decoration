@@ -8,24 +8,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import com.dgreenhalgh.android.simpleitemdecoration.DividerItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.EndOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.StartOffsetItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class VerticalLinearLayoutManagerSampleActivity extends Activity {
 
-    private CheckBox mDividersCheckBox;
-    private CheckBox mStartOffsetCheckBox;
-    private CheckBox mEndOffsetCheckBox;
+    private DividerControlsView mDividerControlsView;
     private RecyclerView mRecyclerView;
-
     private RecyclerView.ItemDecoration mDividerItemDecoration;
     private RecyclerView.ItemDecoration mStartOffsetItemDecoration;
     private RecyclerView.ItemDecoration mEndOffsetItemDecoration;
@@ -43,39 +37,12 @@ public class VerticalLinearLayoutManagerSampleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vertical_linear_layout_manager_sample);
 
-        mDividersCheckBox = (CheckBox) findViewById(R.id.activity_vertical_linear_layout_manager_sample_dividersCheckBox);
-        mDividersCheckBox.setOnCheckedChangeListener(mDividersCheckBoxCheckedChangeListener);
-
-        mStartOffsetCheckBox = (CheckBox) findViewById(R.id.activity_vertical_linear_layout_manager_sample_startOffsetCheckBox);
-        mStartOffsetCheckBox.setOnCheckedChangeListener(mStartOffsetCheckBoxCheckedChangeListener);
-
-        mEndOffsetCheckBox = (CheckBox) findViewById(R.id.activity_vertical_linear_layout_manager_sample_endOffsetCheckBox);
-        mEndOffsetCheckBox.setOnCheckedChangeListener(mEndOffsetCheckBoxCheckedChangeListener);
+        mDividerControlsView = (DividerControlsView) findViewById(R.id.activity_vertical_linear_layout_manager_sample_dividerControlsView);
+        mDividerControlsView.setOnVisibilityChangeListener(mOnVisibilityChangeListener);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.activity_vertical_linear_layout_manager_sample_recyclerView);
         initRecyclerView();
     }
-
-    private CompoundButton.OnCheckedChangeListener mDividersCheckBoxCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            toggleDividerVisibility();
-        }
-    };
-
-    private CompoundButton.OnCheckedChangeListener mStartOffsetCheckBoxCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            toggleStartOffsetVisibility();
-        }
-    };
-
-    private CompoundButton.OnCheckedChangeListener mEndOffsetCheckBoxCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            toggleEndOffsetVisibility();
-        }
-    };
 
     private void initRecyclerView() {
         List<String> sampleStringList = SampleDataBank.getSampleData();
@@ -123,4 +90,21 @@ public class VerticalLinearLayoutManagerSampleActivity extends Activity {
             mEndOffsetVisible = true;
         }
     }
+
+    private DividerControlsView.OnVisibilityChangeListener mOnVisibilityChangeListener = new DividerControlsView.OnVisibilityChangeListener() {
+        @Override
+        public void onDividerVisibilityChange() {
+            toggleDividerVisibility();
+        }
+
+        @Override
+        public void onStartOffsetVisibilityChange() {
+            toggleStartOffsetVisibility();
+        }
+
+        @Override
+        public void onEndOffsetVisibilityChange() {
+            toggleEndOffsetVisibility();
+        }
+    };
 }

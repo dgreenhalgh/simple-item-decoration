@@ -4,23 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/activity_horizontal_linear_layout_manager_sample_dividersCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_horizontal_linear_layout_manager_sample_dividerCheckBoxText"/>
-
-    <CheckBox
-        android:id="@+id/activity_horizontal_linear_layout_manager_sample_startOffsetCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_horizontal_linear_layout_manager_sample_startOffsetCheckBoxText"/>
-
-    <CheckBox
-        android:id="@+id/activity_horizontal_linear_layout_manager_sample_endOffsetCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_horizontal_linear_layout_manager_sample_endOffsetCheckBoxText"/>
+    <com.dgreenhalgh.android.simpleitemdecorationsample.DividerControlsView
+        android:id="@+id/activity_horizontal_linear_layout_manager_sample_dividerControlsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_horizontal_linear_layout_manager_sample_recyclerView"
