@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <CheckBox
+        android:id="@+id/view_divider_controls_dividersCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_divider_controls_dividerCheckBoxText"/>
+
+    <CheckBox
+        android:id="@+id/view_divider_controls_startOffsetCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_divider_controls_startOffsetCheckBoxText"/>
+
+    <CheckBox
+        android:id="@+id/view_divider_controls_endOffsetCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_divider_controls_endOffsetCheckBoxText"/>
+
+</merge>
