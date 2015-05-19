@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.dgreenhalgh.android.simpleitemdecoration.GridDividerItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.GridEndOffsetItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.GridStartOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridEndOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridStartOffsetItemDecoration;
 
 import java.util.List;
 

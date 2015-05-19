@@ -1,15 +1,15 @@
-package com.dgreenhalgh.android.simpleitemdecoration;
+package com.dgreenhalgh.android.simpleitemdecoration.linear;
 
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
+public class StartOffsetItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mOffsetPx;
 
-    public EndOffsetItemDecoration(int offsetPx) {
+    public StartOffsetItemDecoration(int offsetPx) {
         mOffsetPx = offsetPx;
     }
 
@@ -17,13 +17,12 @@ public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 
-        int itemCount = state.getItemCount();
-        if (parent.getChildAdapterPosition(view) == itemCount - 1) {
+        if (parent.getChildAdapterPosition(view) < 1) {
             int orientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
             if (orientation == LinearLayoutManager.HORIZONTAL) {
-                outRect.right = mOffsetPx;
-            } else {
-                outRect.bottom = mOffsetPx;
+                outRect.left = mOffsetPx;
+            } else if (orientation == LinearLayoutManager.VERTICAL) {
+                outRect.top = mOffsetPx;
             }
         }
     }

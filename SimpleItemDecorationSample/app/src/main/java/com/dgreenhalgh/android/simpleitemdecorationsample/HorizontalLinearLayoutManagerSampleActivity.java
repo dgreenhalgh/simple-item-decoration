@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.dgreenhalgh.android.simpleitemdecoration.DividerItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.EndOffsetItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.StartOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.linear.EndOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.linear.StartOffsetItemDecoration;
 
 import java.util.List;
 
