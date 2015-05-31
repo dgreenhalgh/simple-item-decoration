@@ -27,35 +27,29 @@ public class DividerControlsView extends LinearLayout {
         setOrientation(VERTICAL);
 
         mDividersCheckBox = (CheckBox) findViewById(R.id.view_divider_controls_dividersCheckBox);
-        mDividersCheckBox.setOnCheckedChangeListener(mDividersCheckBoxCheckedChangeListener);
+        mDividersCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mOnVisibilityChangeListener.onDividerVisibilityChange();
+            }
+        });
 
         mStartOffsetCheckBox = (CheckBox) findViewById(R.id.view_divider_controls_startOffsetCheckBox);
-        mStartOffsetCheckBox.setOnCheckedChangeListener(mStartOffsetCheckBoxCheckedChangeListener);
+        mStartOffsetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mOnVisibilityChangeListener.onStartOffsetVisibilityChange();
+            }
+        });
 
         mEndOffsetCheckBox = (CheckBox) findViewById(R.id.view_divider_controls_endOffsetCheckBox);
-        mEndOffsetCheckBox.setOnCheckedChangeListener(mEndOffsetCheckBoxCheckedChangeListener);
+        mEndOffsetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mOnVisibilityChangeListener.onEndOffsetVisibilityChange();
+            }
+        });
     }
-
-    private CompoundButton.OnCheckedChangeListener mDividersCheckBoxCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            mOnVisibilityChangeListener.onDividerVisibilityChange();
-        }
-    };
-
-    private CompoundButton.OnCheckedChangeListener mStartOffsetCheckBoxCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            mOnVisibilityChangeListener.onStartOffsetVisibilityChange();
-        }
-    };
-
-    private CompoundButton.OnCheckedChangeListener mEndOffsetCheckBoxCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            mOnVisibilityChangeListener.onEndOffsetVisibilityChange();
-        }
-    };
 
     public void setOnVisibilityChangeListener(OnVisibilityChangeListener onVisibilityChangeListener) {
         mOnVisibilityChangeListener = onVisibilityChangeListener;
