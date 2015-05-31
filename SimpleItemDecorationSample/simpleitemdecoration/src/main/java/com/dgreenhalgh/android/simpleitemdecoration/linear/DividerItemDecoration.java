@@ -34,6 +34,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 
+        if (parent.getChildAdapterPosition(view) == 0) {
+            return;
+        }
+
         mOrientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
         if (mOrientation == LinearLayoutManager.HORIZONTAL) {
             outRect.left = mDivider.getIntrinsicWidth();
