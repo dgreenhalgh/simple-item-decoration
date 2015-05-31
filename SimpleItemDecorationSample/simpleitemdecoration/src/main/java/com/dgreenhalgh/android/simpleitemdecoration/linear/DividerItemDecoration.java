@@ -34,6 +34,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 
+        if (parent.getChildAdapterPosition(view) == 0) {
+            return;
+        }
+
         mOrientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
         if (mOrientation == LinearLayoutManager.HORIZONTAL) {
             outRect.left = mDivider.getIntrinsicWidth();
@@ -51,7 +55,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int parentBottom = parent.getHeight() - parent.getPaddingBottom();
 
         int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
+        for (int i = 0; i < childCount - 1; i++) {
             View child = parent.getChildAt(i);
 
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
@@ -73,7 +77,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int parentRight = parent.getWidth() - parent.getPaddingRight();
 
         int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
+        for (int i = 0; i < childCount - 1; i++) {
             View child = parent.getChildAt(i);
 
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();

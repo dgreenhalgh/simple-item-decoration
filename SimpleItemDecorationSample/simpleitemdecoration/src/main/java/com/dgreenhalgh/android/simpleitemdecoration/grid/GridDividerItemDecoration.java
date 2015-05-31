@@ -42,7 +42,10 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
             outRect.left = mHorizontalDivider.getIntrinsicWidth();
         }
 
-        outRect.top = mVerticalDivider.getIntrinsicHeight();
+        boolean childIsInFirstRow = (parent.getChildAdapterPosition(view)) < mNumColumns;
+        if (!childIsInFirstRow) {
+            outRect.top = mVerticalDivider.getIntrinsicHeight();
+        }
     }
 
     /**
@@ -53,20 +56,15 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
         int parentTop = parent.getPaddingTop();
         int parentBottom = parent.getHeight() - parent.getPaddingBottom();
 
-        int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            boolean childIsInLastColumn = (i + 1) % mNumColumns == 0;
-            if (!childIsInLastColumn) {
-                View child = parent.getChildAt(i);
+        for (int i = 0; i < mNumColumns; i++) {
+            View child = parent.getChildAt(i);
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+            int parentLeft = child.getRight() + params.rightMargin;
+            int parentRight = parentLeft + mHorizontalDivider.getIntrinsicWidth();
 
-                int parentLeft = child.getRight() + params.rightMargin;
-                int parentRight = parentLeft + mHorizontalDivider.getIntrinsicWidth();
-
-                mHorizontalDivider.setBounds(parentLeft, parentTop, parentRight, parentBottom);
-                mHorizontalDivider.draw(canvas);
-            }
+            mHorizontalDivider.setBounds(parentLeft, parentTop, parentRight, parentBottom);
+            mHorizontalDivider.draw(canvas);
         }
     }
 
@@ -80,10 +78,12 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
 
         int childCount = parent.getChildCount();
         int numChildrenOnLastRow = childCount % mNumColumns;
-        int childCountMinusLastRow = childCount - numChildrenOnLastRow;
-        for (int i = 0; i < childCountMinusLastRow; i++) {
-            View child = parent.getChildAt(i);
-
+        int numRows = childCount / mNumColumns;
+        if (numChildrenOnLastRow == 0) { // TODO: Replace this with math
+            numRows--;
+        }
+        for (int i = 0; i < numRows; i++) {
+            View child = parent.getChildAt(i * mNumColumns);
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
             int parentTop = child.getBottom() + params.bottomMargin;
