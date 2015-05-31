@@ -19,6 +19,8 @@ public class SampleDataBank {
         sampleStringList.add("Jason");
         sampleStringList.add("Bolot");
         sampleStringList.add("Sean");
+        sampleStringList.add("Ryan");
+        sampleStringList.add("Aaron");
 
         return sampleStringList;
     }
