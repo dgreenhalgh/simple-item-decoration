@@ -1,1 +1,1 @@
-include ':app', ':simpleitemdecoration'
+include ':sample', ':simpleitemdecoration'
