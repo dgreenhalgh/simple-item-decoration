@@ -1,11 +1,11 @@
 package com.dgreenhalgh.android.simpleitemdecorationsample.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -19,7 +19,7 @@ import com.dgreenhalgh.android.simpleitemdecorationsample.view.DividerControlsVi
 import java.util.List;
 
 
-public class GridLayoutManagerSampleActivity extends Activity {
+public class GridLayoutManagerSampleActivity extends ActionBarActivity {
 
     private static final int NUM_COLUMNS = 3;
 
