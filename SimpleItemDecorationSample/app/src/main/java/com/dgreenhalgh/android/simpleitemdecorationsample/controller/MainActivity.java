@@ -1,16 +1,16 @@
 package com.dgreenhalgh.android.simpleitemdecorationsample.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 
 import com.dgreenhalgh.android.simpleitemdecorationsample.R;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     private Button mVerticalLinearLayoutManagerSampleButton;
     private Button mHorizontalLinearLayoutManagerSampleButton;
@@ -22,42 +22,36 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mVerticalLinearLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_verticalLinearLayoutManagerButton);
-        mVerticalLinearLayoutManagerSampleButton.setOnClickListener(mVerticalLinearLayoutManagerSampleButtonClickListener);
+        mVerticalLinearLayoutManagerSampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+
+                Intent verticalLinearLayoutManagerSampleIntent = VerticalLinearLayoutManagerSampleActivity.newIntent(context);
+                context.startActivity(verticalLinearLayoutManagerSampleIntent);
+            }
+        });
 
         mHorizontalLinearLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_horizontalLinearLayoutManagerButton);
-        mHorizontalLinearLayoutManagerSampleButton.setOnClickListener(mHorizontalLinearLayoutManagerSampleButtonClickListener);
+        mHorizontalLinearLayoutManagerSampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+
+                Intent horizontalLinearLayoutManagerSampleIntent = HorizontalLinearLayoutManagerSampleActivity.newIntent(context);
+                context.startActivity(horizontalLinearLayoutManagerSampleIntent);
+            }
+        });
 
         mGridLayoutManagerSampleButton = (Button) findViewById(R.id.activity_main_gridLayoutManagerButton);
-        mGridLayoutManagerSampleButton.setOnClickListener(mGridLayoutManagerSampleButtonClickListener);
+        mGridLayoutManagerSampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+
+                Intent gridLayoutManagerSampleIntent = GridLayoutManagerSampleActivity.newIntent(context);
+                context.startActivity(gridLayoutManagerSampleIntent);
+            }
+        });
     }
-
-    private View.OnClickListener mVerticalLinearLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Context context = view.getContext();
-
-            Intent verticalLinearLayoutManagerSampleIntent = VerticalLinearLayoutManagerSampleActivity.newIntent(context);
-            context.startActivity(verticalLinearLayoutManagerSampleIntent);
-        }
-    };
-
-    private View.OnClickListener mHorizontalLinearLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Context context = view.getContext();
-
-            Intent horizontalLinearLayoutManagerSampleIntent = HorizontalLinearLayoutManagerSampleActivity.newIntent(context);
-            context.startActivity(horizontalLinearLayoutManagerSampleIntent);
-        }
-    };
-
-    private View.OnClickListener mGridLayoutManagerSampleButtonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Context context = view.getContext();
-
-            Intent gridLayoutManagerSampleIntent = GridLayoutManagerSampleActivity.newIntent(context);
-            context.startActivity(gridLayoutManagerSampleIntent);
-        }
-    };
 }
