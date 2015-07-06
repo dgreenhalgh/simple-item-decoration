@@ -94,6 +94,14 @@ recyclerView.addItemDecoration(new GridBottomOffsetItemDecoration(offsetPx, numC
 
 **TODO**
 
+###Contribute
+
+Improvements/additions are encouraged. Clone the project with:
+
+```
+git clone https://github.com/bignerdranch/simple-item-decoration.git
+```
+
 ###License
 
 ```
