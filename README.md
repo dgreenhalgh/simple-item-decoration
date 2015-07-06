@@ -90,6 +90,10 @@ int numColumns = 2;
 recyclerView.addItemDecoration(new GridBottomOffsetItemDecoration(offsetPx, numColumns));
 ```
 
+###Project Setup
+
+**TODO**
+
 ###License
 
 ```
