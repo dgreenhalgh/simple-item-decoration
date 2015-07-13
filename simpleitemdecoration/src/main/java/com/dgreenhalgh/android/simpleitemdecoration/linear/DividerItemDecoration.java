@@ -7,6 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+/**
+ * An ItemDecoration used to add interior dividers to a RecyclerView with a
+ * LinearLayoutManager
+ */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable mDivider;
@@ -21,6 +25,16 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         mDivider = divider;
     }
 
+    /**
+     * Override of RecyclerView.ItemDecoration#onDraw
+     * <p/>
+     * This implementation draws horizontal or vertical dividers onto the
+     * parent RecyclerView.
+     *
+     * @param canvas The Canvas onto which dividers will be drawn
+     * @param parent The RecyclerView onto which dividers are being added
+     * @param state The current state of the RecyclerView
+     */
     @Override
     public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
         if (mOrientation == LinearLayoutManager.HORIZONTAL) {
@@ -30,6 +44,17 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
+    /**
+     * Override of RecyclerView.ItemDecoration#getItemOffsets
+     * <p/>
+     * This implementation determines the size and location of offsets between
+     * items in the RecyclerView parent.
+     *
+     * @param outRect The Rect of offsets to be added around the child view
+     * @param view The child view to be decorated with an offset
+     * @param parent The RecyclerView onto which dividers are being added
+     * @param state The current state of the RecyclerView
+     */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
@@ -49,6 +74,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * Adds dividers to a RecyclerView with a LinearLayoutManager (or its
      * subclass) oriented horizontally.
+     *
+     * @param canvas The Canvas onto which horizontal dividers will be drawn
+     * @param parent The RecyclerView onto which horizontal dividers are being
+     *               added
      */
     private void drawHorizontalDividers(Canvas canvas, RecyclerView parent) {
         int parentTop = parent.getPaddingTop();
@@ -71,6 +100,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * Adds dividers to a RecyclerView with a LinearLayoutManager (or its
      * subclass) oriented vertically.
+     *
+     * @param canvas The Canvas onto which vertical dividers will be drawn
+     * @param parent The RecyclerView onto which vertical dividers are being
+     *               added
      */
     private void drawVerticalDividers(Canvas canvas, RecyclerView parent) {
         int parentLeft = parent.getPaddingLeft();
