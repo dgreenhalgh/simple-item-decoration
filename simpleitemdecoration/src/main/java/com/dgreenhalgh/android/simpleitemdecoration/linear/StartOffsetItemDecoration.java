@@ -7,11 +7,11 @@ import android.view.View;
 
 /**
  * An ItemDecoration used to add an offset to the start of a RecyclerView using
- * a LinearLayoutManager.
+ * a LinearLayoutManager or its subclass
  * <p/>
- * If the LinearLayoutManager is oriented vertically, the offset will be added
- * to the top of the RecyclerView. If the LinearLayoutManager is oriented
- * horizontally, the offset will be added to the left of the RecyclerView.
+ * If the LayoutManager is oriented vertically, the offset will be added to the
+ * top of the RecyclerView. If the LayoutManager is oriented horizontally, the
+ * offset will be added to the left of the RecyclerView.
  */
 public class StartOffsetItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -32,7 +32,7 @@ public class StartOffsetItemDecoration extends RecyclerView.ItemDecoration {
      * Override of RecyclerView.ItemDecoration#getItemOffsets
      * <p/>
      * This implementation determines the size and location of the offset to be
-     * added to the start of the RecyclerView.
+     * added to the start of the RecyclerView
      *
      * @param outRect The Rect of offsets to be added around the child view
      * @param view The child view to be decorated with an offset

@@ -6,6 +6,10 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+/**
+ * An ItemDecoration used to add interior dividers to a RecyclerView with a
+ * GridLayoutManager
+ */
 public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable mHorizontalDivider;
@@ -13,7 +17,7 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
     private int mNumColumns;
 
     /**
-     * Adds dividers to a RecyclerView with a GridLayoutManager.
+     * Constructor that takes in Drawables to be used as interior dividers
      *
      * @param horizontalDivider A divider Drawable to be drawn on the rows of
      *                          the grid of the RecyclerView
@@ -27,6 +31,16 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
         mNumColumns = numColumns;
     }
 
+    /**
+     * Override of RecyclerView.ItemDecoration#onDraw
+     * <p/>
+     * This implementation draws horizontal and/or vertical dividers onto the
+     * parent RecyclerView.
+     *
+     * @param canvas The Canvas onto which dividers will be drawn
+     * @param parent The RecyclerView onto which dividers are being added
+     * @param state The current state of the RecyclerView
+     */
     @Override
     public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
         drawHorizontalDividers(canvas, parent);
@@ -49,8 +63,11 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * Adds horizontal dividers to a RecyclerView with a GridLayoutManager (or
-     * its subclass).
+     * Adds horizontal dividers to a RecyclerView with a GridLayoutManager or
+     * its subclass
+     *
+     * @param canvas The Canvas onto which dividers will be drawn
+     * @param parent The RecyclerView onto which dividers are being added
      */
     private void drawHorizontalDividers(Canvas canvas, RecyclerView parent) {
         int parentTop = parent.getPaddingTop();
@@ -69,8 +86,11 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * Adds vertical dividers to a RecyclerView with a GridLayoutManager (or
-     * its subclass).
+     * Adds vertical dividers to a RecyclerView with a GridLayoutManager or its
+     * subclass
+     *
+     * @param canvas The Canvas onto which dividers will be drawn
+     * @param parent The RecyclerView onto which dividers are being added
      */
     private void drawVerticalDividers(Canvas canvas, RecyclerView parent) {
         int parentLeft = parent.getPaddingLeft();

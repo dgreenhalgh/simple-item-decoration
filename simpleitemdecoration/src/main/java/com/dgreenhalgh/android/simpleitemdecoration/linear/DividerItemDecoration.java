@@ -9,7 +9,7 @@ import android.view.View;
 
 /**
  * An ItemDecoration used to add interior dividers to a RecyclerView with a
- * LinearLayoutManager
+ * LinearLayoutManager or its subclass
  */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -72,8 +72,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * Adds dividers to a RecyclerView with a LinearLayoutManager (or its
-     * subclass) oriented horizontally.
+     * Adds dividers to a RecyclerView with a LinearLayoutManager or its
+     * subclass oriented horizontally
      *
      * @param canvas The Canvas onto which horizontal dividers will be drawn
      * @param parent The RecyclerView onto which horizontal dividers are being
@@ -98,8 +98,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * Adds dividers to a RecyclerView with a LinearLayoutManager (or its
-     * subclass) oriented vertically.
+     * Adds dividers to a RecyclerView with a LinearLayoutManager or its
+     * subclass oriented vertically
      *
      * @param canvas The Canvas onto which vertical dividers will be drawn
      * @param parent The RecyclerView onto which vertical dividers are being

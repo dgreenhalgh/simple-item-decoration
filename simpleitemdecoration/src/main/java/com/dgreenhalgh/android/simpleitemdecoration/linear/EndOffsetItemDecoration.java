@@ -7,11 +7,11 @@ import android.view.View;
 
 /**
  * An ItemDecoration used to add an offset to the end of a RecyclerView using a
- * LinearLayoutManager.
+ * LinearLayoutManager or its subclass.
  * <p/>
- * If the LinearLayoutManager is oriented vertically, the offset will be added
- * to the bottom of the RecyclerView. If the LinearLayoutManager is oriented
- * horizontally, the offset will be added to the right of the RecyclerView.
+ * If the LayoutManager is oriented vertically, the offset will be added to the
+ * bottom of the RecyclerView. If the LayoutManager is oriented horizontally,
+ * the offset will be added to the right of the RecyclerView.
  */
 public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
 
