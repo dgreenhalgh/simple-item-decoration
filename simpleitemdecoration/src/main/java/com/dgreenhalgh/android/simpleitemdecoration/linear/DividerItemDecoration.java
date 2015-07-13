@@ -17,7 +17,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private int mOrientation;
 
     /**
-     * Adds dividers to a RecyclerView with a LinearLayoutManager.
+     * Constructor that takes in a Drawable to be used as the interior divider
      *
      * @param divider A divider Drawable to be drawn on the RecyclerView
      */
