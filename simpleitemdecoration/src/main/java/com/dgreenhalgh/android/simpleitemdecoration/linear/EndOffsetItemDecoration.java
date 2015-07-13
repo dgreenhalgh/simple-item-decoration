@@ -6,38 +6,38 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * An ItemDecoration used to add an offset to the end of a RecyclerView using a
- * LinearLayoutManager or its subclass.
- * <p/>
- * If the LayoutManager is oriented vertically, the offset will be added to the
- * bottom of the RecyclerView. If the LayoutManager is oriented horizontally,
- * the offset will be added to the right of the RecyclerView.
+ * Adds an offset to the end of a {@link RecyclerView} using a
+ * {@link LinearLayoutManager} or its subclass.
+ * <p>
+ * If the {@link android.support.v7.widget.RecyclerView.LayoutManager} is
+ * oriented vertically, the offset will be added to the bottom of the
+ * {@code RecyclerView}. If the {@code LayoutManager} is oriented horizontally,
+ * the offset will be added to the right of the {@code RecyclerView}.
  */
 public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mOffsetPx;
 
     /**
-     * Constructor that takes in the size of the offset to be added to the end
-     * of the RecyclerView
+     * Sole constructor. Takes in the size of the offset to be added to the end
+     * of the {@link RecyclerView}.
      *
      * @param offsetPx The size of the offset to be added to the end of the
-     *                 RecyclerView in pixels
+     *                 {@code RecyclerView} in pixels
      */
     public EndOffsetItemDecoration(int offsetPx) {
         mOffsetPx = offsetPx;
     }
 
     /**
-     * Override of RecyclerView.ItemDecoration#getItemOffsets
-     * <p/>
-     * This implementation determines the size and location of the offset to be
-     * added to the end of the RecyclerView.
+     * Determines the size and location of the offset to be added to the end
+     * of the {@link RecyclerView}.
      *
-     * @param outRect The Rect of offsets to be added around the child view
+     * @param outRect The {@link Rect} of offsets to be added around the child view
      * @param view The child view to be decorated with an offset
-     * @param parent The RecyclerView onto which an offset is being added
-     * @param state The current state of the RecyclerView
+     * @param parent The {@code RecyclerView} onto which dividers are being added
+     * @param state The current {@link android.support.v7.widget.RecyclerView.State}
+     *              of the {@code RecyclerView}
      */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
