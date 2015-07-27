@@ -4,12 +4,12 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class GridEndOffsetItemDecoration extends RecyclerView.ItemDecoration {
+public class GridBottomOffsetItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mOffsetPx;
     private int mNumColumns;
 
-    public GridEndOffsetItemDecoration(int offsetPx, int numColumns) {
+    public GridBottomOffsetItemDecoration(int offsetPx, int numColumns) {
         mOffsetPx = offsetPx;
         mNumColumns = numColumns;
     }

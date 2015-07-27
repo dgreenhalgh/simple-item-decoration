@@ -10,8 +10,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.grid.GridEndOffsetItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.grid.GridStartOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridBottomOffsetItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridTopOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecorationsample.R;
 import com.dgreenhalgh.android.simpleitemdecorationsample.model.SampleDataBank;
 import com.dgreenhalgh.android.simpleitemdecorationsample.view.DividerControlsView;
@@ -60,10 +60,10 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         mDividerItemDecoration = new GridDividerItemDecoration(dividerDrawable, dividerDrawable, NUM_COLUMNS);
 
         int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
-        mStartOffsetItemDecoration = new GridStartOffsetItemDecoration(startOffsetPx, NUM_COLUMNS);
+        mStartOffsetItemDecoration = new GridTopOffsetItemDecoration(startOffsetPx, NUM_COLUMNS);
 
         int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
-        mEndOffsetItemDecoration = new GridEndOffsetItemDecoration(endOffsetPx, NUM_COLUMNS);
+        mEndOffsetItemDecoration = new GridBottomOffsetItemDecoration(endOffsetPx, NUM_COLUMNS);
     }
 
     private void toggleDividerVisibility() {
