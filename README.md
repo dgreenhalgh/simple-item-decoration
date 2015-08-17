@@ -17,7 +17,7 @@ All of the ItemDecorations included can be added to your RecyclerView by calling
 Its constructor takes in your preferred divider as a `Drawable`.
 
 ```java
-Drawable dividerDrawable = getResources().getDrawable(R.drawable.divider);
+Drawable dividerDrawable = ContextCompat.getDrawable(this, R.drawable.divider_sample);
 
 recyclerView.addItemDecoration(new DividerItemDecoration(dividerDrawable));
 ```
@@ -57,8 +57,8 @@ recyclerView.addItemDecoration(new EndOffsetItemDecoration(offsetPx));
 Its constructor takes in your preferred horizontal and vertical dividers, along with the number of columns in the grid.
 
 ```java
-Drawable horizontalDividerDrawable = getResources().getDrawable(R.drawable.divider_horizontal);
-Drawable verticalDividerDrawable = getResources().getDrawable(R.drawable.divider_vertical);
+Drawable horizontalDividerDrawable = ContextCompat.getDrawable(this, R.drawable.divider_horizontal);
+Drawable verticalDividerDrawable = ContextCompat.getDrawable(this, R.drawable.divider_vertical);
 int numColumns = 2;
 
 recyclerView.addItemDecoration(new GridDividerItemDecoration(horizontalDividerDrawable, verticalDividerDrawable, numColumns));

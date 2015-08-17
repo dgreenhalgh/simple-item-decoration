@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,10 +56,10 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, NUM_COLUMNS));
         mRecyclerView.setAdapter(new SimpleItemDecorationSampleListAdapter(sampleStringList));
 
-        Resources resources = getResources();
-        Drawable dividerDrawable = resources.getDrawable(R.drawable.divider_sample);
+        Drawable dividerDrawable = ContextCompat.getDrawable(this, R.drawable.divider_sample);
         mDividerItemDecoration = new GridDividerItemDecoration(dividerDrawable, dividerDrawable, NUM_COLUMNS);
 
+        Resources resources = getResources();
         int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
         mStartOffsetItemDecoration = new GridTopOffsetItemDecoration(startOffsetPx, NUM_COLUMNS);
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,10 +54,10 @@ public class HorizontalLinearLayoutManagerSampleActivity extends ActionBarActivi
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setAdapter(new SimpleItemDecorationSampleListAdapter(sampleStringList));
 
-        Resources resources = getResources();
-        Drawable dividerDrawable = resources.getDrawable(R.drawable.divider_sample);
+        Drawable dividerDrawable = ContextCompat.getDrawable(this, R.drawable.divider_sample);
         mDividerItemDecoration = new DividerItemDecoration(dividerDrawable);
 
+        Resources resources = getResources();
         int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
         mStartOffsetItemDecoration = new StartOffsetItemDecoration(startOffsetPx);
 
