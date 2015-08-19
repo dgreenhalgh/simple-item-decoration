@@ -106,7 +106,7 @@ repositories {
 }
 ```
 
-...and the dependency, replacing "<release tag>" with the name of the release tag:
+...and the dependency, replacing "\<release tag\>" with the name of the release tag:
 
 ```groovy
 dependencies {
