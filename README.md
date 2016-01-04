@@ -92,19 +92,11 @@ recyclerView.addItemDecoration(new GridBottomOffsetItemDecoration(offsetPx, numC
 
 ###Project Setup
 
-Current development can be found at the following snapshot:
-```gradle
-compile 'com.bignerdranch.android:simple-item-decoration:1.0.0-SNAPSHOT'
+The latest release can be used by adding the following to your app's build.gradle:
+```
+compile 'com.bignerdranch.android:simple-item-decoration:1.0.0'
 ```
 
-Make sure to add Sonatype's snapshots to your repositories closure in the root `build.gradle`:
-```gradle
-allprojects {
-    repositories {
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    }
-}
-```
 You can also clone the project and add it as a module to your project.
 
 ###Contribute
