@@ -37,7 +37,7 @@ public class StartOffsetItemDecoration extends RecyclerView.ItemDecoration {
      * the RecyclerView.
      *
      * @param offsetDrawable The {@code Drawable} to be added to the start of
-     *                       the RecyclerView.
+     *                       the RecyclerView
      */
     public StartOffsetItemDecoration(Drawable offsetDrawable) {
         mOffsetDrawable = offsetDrawable;
@@ -76,7 +76,8 @@ public class StartOffsetItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * Draws horizontal or vertical offset onto the parent RecyclerView.
+     * Draws horizontal or vertical offset onto the start of the parent
+     * RecyclerView.
      *
      * @param c The {@link Canvas} onto which an offset will be drawn
      * @param parent The RecyclerView onto which an offset is being added
