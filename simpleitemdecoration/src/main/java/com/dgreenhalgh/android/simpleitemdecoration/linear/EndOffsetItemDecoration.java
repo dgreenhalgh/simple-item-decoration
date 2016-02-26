@@ -22,7 +22,7 @@ public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
     private int mOrientation;
 
     /**
-     * Sole constructor. Takes in the size of the offset to be added to the end
+     * Constructor that takes in the size of the offset to be added to the end
      * of the RecyclerView.
      *
      * @param offsetPx The size of the offset to be added to the end of the
