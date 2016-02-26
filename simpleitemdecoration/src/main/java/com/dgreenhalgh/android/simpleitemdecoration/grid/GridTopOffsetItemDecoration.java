@@ -1,6 +1,8 @@
 package com.dgreenhalgh.android.simpleitemdecoration.grid;
 
+import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -11,10 +13,11 @@ import android.view.View;
 public class GridTopOffsetItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mOffsetPx;
+    private Drawable mOffsetDrawable;
     private int mNumColumns;
 
     /**
-     * Sole constructor. Takes in the size of the offset to be added to the top
+     * Constructor that takes in the size of the offset to be added to the top
      * of the RecyclerView.
      *
      * @param offsetPx The size of the offset to be added to the top of the
@@ -23,6 +26,19 @@ public class GridTopOffsetItemDecoration extends RecyclerView.ItemDecoration {
      */
     public GridTopOffsetItemDecoration(int offsetPx, int numColumns) {
         mOffsetPx = offsetPx;
+        mNumColumns = numColumns;
+    }
+
+    /**
+     * Constructor that takes in a {@link Drawable} to be drawn at the top of
+     * the RecyclerView.
+     *
+     * @param offsetDrawable The {@code Drawable} to be added to the top of the
+     *                       RecyclerView
+     * @param numColumns The number of columns in the grid of the RecyclerView
+     */
+    public GridTopOffsetItemDecoration(Drawable offsetDrawable, int numColumns) {
+        mOffsetDrawable = offsetDrawable;
         mNumColumns = numColumns;
     }
 
@@ -41,7 +57,27 @@ public class GridTopOffsetItemDecoration extends RecyclerView.ItemDecoration {
 
         boolean childIsInTopRow = parent.getChildAdapterPosition(view) < mNumColumns;
         if (childIsInTopRow) {
-            outRect.top = mOffsetPx;
+            if (mOffsetPx > 0) {
+                outRect.top = mOffsetPx;
+            } else if (mOffsetDrawable != null) {
+                outRect.top = mOffsetDrawable.getIntrinsicHeight();
+            }
         }
+    }
+
+    @Override
+    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        super.onDraw(c, parent, state);
+        if (mOffsetDrawable == null) {
+            return;
+        }
+
+        int parentLeft = parent.getPaddingLeft();
+        int parentRight = parent.getWidth() - parent.getPaddingRight();
+        int parentTop = parent.getPaddingTop();
+        int offsetDrawableBottom = parentTop + mOffsetDrawable.getIntrinsicHeight();
+
+        mOffsetDrawable.setBounds(parentLeft, parentTop, parentRight, offsetDrawableBottom);
+        mOffsetDrawable.draw(c);
     }
 }
