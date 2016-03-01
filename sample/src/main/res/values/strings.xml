@@ -11,6 +11,8 @@
     <!-- Sample Activities -->
     <string name="view_divider_controls_dividerCheckBoxText">Dividers</string>
     <string name="view_divider_controls_startOffsetCheckBoxText">Start offset</string>
+    <string name="view_divider_controls_startDrawableOffsetCheckBoxText">Start drawable offset</string>
     <string name="view_divider_controls_endOffsetCheckBoxText">End offset</string>
+    <string name="view_divider_controls_endDrawableOffsetCheckBoxText">End drawable offset</string>
 
 </resources>

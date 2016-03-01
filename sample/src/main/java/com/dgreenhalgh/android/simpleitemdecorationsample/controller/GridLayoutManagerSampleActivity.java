@@ -28,11 +28,15 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.ItemDecoration mDividerItemDecoration;
     private RecyclerView.ItemDecoration mStartOffsetItemDecoration;
+    private RecyclerView.ItemDecoration mStartDrawableOffsetItemDecoration;
     private RecyclerView.ItemDecoration mEndOffsetItemDecoration;
+    private RecyclerView.ItemDecoration mEndDrawableOffsetItemDecoration;
 
     private boolean mDividersVisible;
     private boolean mStartOffsetVisible;
+    private boolean mStartDrawableOffsetVisible;
     private boolean mEndOffsetVisible;
+    private boolean mEndDrawableOffsetVisible;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, GridLayoutManagerSampleActivity.class);
@@ -63,8 +67,12 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
         mStartOffsetItemDecoration = new GridTopOffsetItemDecoration(startOffsetPx, NUM_COLUMNS);
 
+        mStartDrawableOffsetItemDecoration = new GridTopOffsetItemDecoration(dividerDrawable, NUM_COLUMNS);
+
         int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
         mEndOffsetItemDecoration = new GridBottomOffsetItemDecoration(endOffsetPx, NUM_COLUMNS);
+
+        mEndDrawableOffsetItemDecoration = new GridBottomOffsetItemDecoration(dividerDrawable, NUM_COLUMNS);
     }
 
     private void toggleDividerVisibility() {
@@ -87,6 +95,16 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         }
     }
 
+    private void toggleStartDrawableOffsetVisibility() {
+        if (mStartDrawableOffsetVisible) {
+            mRecyclerView.removeItemDecoration(mStartDrawableOffsetItemDecoration);
+            mStartDrawableOffsetVisible = false;
+        } else {
+            mRecyclerView.addItemDecoration(mStartDrawableOffsetItemDecoration);
+            mStartDrawableOffsetVisible = true;
+        }
+    }
+
     private void toggleEndOffsetVisibility() {
         if (mEndOffsetVisible) {
             mRecyclerView.removeItemDecoration(mEndOffsetItemDecoration);
@@ -94,6 +112,16 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         } else {
             mRecyclerView.addItemDecoration(mEndOffsetItemDecoration);
             mEndOffsetVisible = true;
+        }
+    }
+
+    private void toggleEndDrawableOffsetVisibility() {
+        if (mEndDrawableOffsetVisible) {
+            mRecyclerView.removeItemDecoration(mEndDrawableOffsetItemDecoration);
+            mEndDrawableOffsetVisible = false;
+        } else {
+            mRecyclerView.addItemDecoration(mEndDrawableOffsetItemDecoration);
+            mEndDrawableOffsetVisible = true;
         }
     }
 
@@ -109,8 +137,18 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         }
 
         @Override
+        public void onStartDrawableOffsetVisibilityChange() {
+            toggleStartDrawableOffsetVisibility();
+        }
+
+        @Override
         public void onEndOffsetVisibilityChange() {
             toggleEndOffsetVisibility();
+        }
+
+        @Override
+        public void onEndDrawableOffsetVisibilityChange() {
+            toggleEndDrawableOffsetVisibility();
         }
     };
 }
