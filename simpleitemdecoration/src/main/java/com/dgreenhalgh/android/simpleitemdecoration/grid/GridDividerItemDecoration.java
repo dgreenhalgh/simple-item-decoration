@@ -42,6 +42,7 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
     public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
         drawHorizontalDividers(canvas, parent);
         drawVerticalDividers(canvas, parent);
+
     }
 
     /**
@@ -69,24 +70,34 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     /**
-     * Adds horizontal dividers to a RecyclerView with a GridLayoutManager or
-     * its subclass.
+     * Adds horizontal dividers to a RecyclerView with a GridLayoutManager or its
+     * subclass.
      *
      * @param canvas The {@link Canvas} onto which dividers will be drawn
      * @param parent The RecyclerView onto which dividers are being added
      */
     private void drawHorizontalDividers(Canvas canvas, RecyclerView parent) {
-        int parentTop = parent.getPaddingTop();
-        int parentBottom = parent.getHeight() - parent.getPaddingBottom();
+        int childCount = parent.getChildCount();
+        int rowCount = childCount / mNumColumns;
+        int lastRowChildCount = childCount % mNumColumns;
 
-        for (int i = 0; i < mNumColumns; i++) {
-            View child = parent.getChildAt(i);
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+        for (int i = 1; i < mNumColumns; i++) {
+            int lastRowChildIndex;
+            if (i < lastRowChildCount) {
+                lastRowChildIndex = i + (rowCount * mNumColumns);
+            } else {
+                lastRowChildIndex = i + ((rowCount - 1) * mNumColumns);
+            }
 
-            int parentLeft = child.getRight() + params.rightMargin;
-            int parentRight = parentLeft + mHorizontalDivider.getIntrinsicWidth();
+            View firstRowChild = parent.getChildAt(i);
+            View lastRowChild = parent.getChildAt(lastRowChildIndex);
 
-            mHorizontalDivider.setBounds(parentLeft, parentTop, parentRight, parentBottom);
+            int dividerTop = firstRowChild.getTop();
+            int dividerRight = firstRowChild.getLeft();
+            int dividerLeft = dividerRight - mHorizontalDivider.getIntrinsicWidth();
+            int dividerBottom = lastRowChild.getBottom();
+
+            mHorizontalDivider.setBounds(dividerLeft, dividerTop, dividerRight, dividerBottom);
             mHorizontalDivider.draw(canvas);
         }
     }
@@ -99,23 +110,25 @@ public class GridDividerItemDecoration extends RecyclerView.ItemDecoration {
      * @param parent The RecyclerView onto which dividers are being added
      */
     private void drawVerticalDividers(Canvas canvas, RecyclerView parent) {
-        int parentLeft = parent.getPaddingLeft();
-        int parentRight = parent.getWidth() - parent.getPaddingRight();
-
         int childCount = parent.getChildCount();
-        int numChildrenOnLastRow = childCount % mNumColumns;
-        int numRows = childCount / mNumColumns;
-        if (numChildrenOnLastRow == 0) { // TODO: Replace this with math
-            numRows--;
-        }
-        for (int i = 0; i < numRows; i++) {
-            View child = parent.getChildAt(i * mNumColumns);
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+        int rowCount = childCount / mNumColumns;
+        int rightmostChildIndex;
+        for (int i = 1; i <= rowCount; i++) {
+            if (i == rowCount) {
+                rightmostChildIndex = parent.getChildCount() - 1;
+            } else {
+                rightmostChildIndex = (i * mNumColumns) + mNumColumns - 1;
+            }
 
-            int parentTop = child.getBottom() + params.bottomMargin;
-            int parentBottom = parentTop + mVerticalDivider.getIntrinsicHeight();
+            View leftmostChild = parent.getChildAt(i * mNumColumns);
+            View rightmostChild = parent.getChildAt(rightmostChildIndex);
 
-            mVerticalDivider.setBounds(parentLeft, parentTop, parentRight, parentBottom);
+            int dividerLeft = leftmostChild.getLeft();
+            int dividerBottom = leftmostChild.getTop();
+            int dividerTop = dividerBottom - mVerticalDivider.getIntrinsicHeight();
+            int dividerRight = rightmostChild.getRight();
+
+            mVerticalDivider.setBounds(dividerLeft, dividerTop, dividerRight, dividerBottom);
             mVerticalDivider.draw(canvas);
         }
     }
