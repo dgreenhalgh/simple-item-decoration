@@ -26,11 +26,15 @@ public class VerticalLinearLayoutManagerSampleActivity extends ActionBarActivity
     private RecyclerView mRecyclerView;
     private RecyclerView.ItemDecoration mDividerItemDecoration;
     private RecyclerView.ItemDecoration mStartOffsetItemDecoration;
+    private RecyclerView.ItemDecoration mStartDrawableOffsetItemDecoration;
     private RecyclerView.ItemDecoration mEndOffsetItemDecoration;
+    private RecyclerView.ItemDecoration mEndDrawableOffsetItemDecoration;
 
     private boolean mDividersVisible;
     private boolean mStartOffsetVisible;
+    private boolean mStartDrawableOffsetVisible;
     private boolean mEndOffsetVisible;
+    private boolean mEndDrawableOffsetVisible;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, VerticalLinearLayoutManagerSampleActivity.class);
@@ -61,8 +65,12 @@ public class VerticalLinearLayoutManagerSampleActivity extends ActionBarActivity
         int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
         mStartOffsetItemDecoration = new StartOffsetItemDecoration(startOffsetPx);
 
+        mStartDrawableOffsetItemDecoration = new StartOffsetItemDecoration(dividerDrawable);
+
         int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
         mEndOffsetItemDecoration = new EndOffsetItemDecoration(endOffsetPx);
+
+        mEndDrawableOffsetItemDecoration = new EndOffsetItemDecoration(dividerDrawable);
     }
 
     private void toggleDividerVisibility() {
@@ -85,6 +93,16 @@ public class VerticalLinearLayoutManagerSampleActivity extends ActionBarActivity
         }
     }
 
+    private void toggleStartDrawableOffsetVisibility() {
+        if (mStartDrawableOffsetVisible) {
+            mRecyclerView.removeItemDecoration(mStartDrawableOffsetItemDecoration);
+            mStartDrawableOffsetVisible = false;
+        } else {
+            mRecyclerView.addItemDecoration(mStartDrawableOffsetItemDecoration);
+            mStartDrawableOffsetVisible = true;
+        }
+    }
+
     private void toggleEndOffsetVisibility() {
         if (mEndOffsetVisible) {
             mRecyclerView.removeItemDecoration(mEndOffsetItemDecoration);
@@ -92,6 +110,16 @@ public class VerticalLinearLayoutManagerSampleActivity extends ActionBarActivity
         } else {
             mRecyclerView.addItemDecoration(mEndOffsetItemDecoration);
             mEndOffsetVisible = true;
+        }
+    }
+
+    private void toggleEndDrawableOffsetVisibility() {
+        if (mEndDrawableOffsetVisible) {
+            mRecyclerView.removeItemDecoration(mEndDrawableOffsetItemDecoration);
+            mEndDrawableOffsetVisible = false;
+        } else {
+            mRecyclerView.addItemDecoration(mEndDrawableOffsetItemDecoration);
+            mEndDrawableOffsetVisible = true;
         }
     }
 
@@ -107,8 +135,18 @@ public class VerticalLinearLayoutManagerSampleActivity extends ActionBarActivity
         }
 
         @Override
+        public void onStartDrawableOffsetVisibilityChange() {
+            toggleStartDrawableOffsetVisibility();
+        }
+
+        @Override
         public void onEndOffsetVisibilityChange() {
             toggleEndOffsetVisibility();
+        }
+
+        @Override
+        public void onEndDrawableOffsetVisibilityChange() {
+            toggleEndDrawableOffsetVisibility();
         }
     };
 }

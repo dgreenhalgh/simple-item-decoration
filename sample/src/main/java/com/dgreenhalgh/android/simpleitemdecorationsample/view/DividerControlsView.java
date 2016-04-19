@@ -13,7 +13,9 @@ public class DividerControlsView extends LinearLayout {
 
     private CheckBox mDividersCheckBox;
     private CheckBox mStartOffsetCheckBox;
+    private CheckBox mStartDrawableOffsetCheckBox;
     private CheckBox mEndOffsetCheckBox;
+    private CheckBox mEndDrawableOffsetCheckBox;
 
     private OnVisibilityChangeListener mOnVisibilityChangeListener;
 
@@ -42,11 +44,27 @@ public class DividerControlsView extends LinearLayout {
             }
         });
 
+        mStartDrawableOffsetCheckBox = (CheckBox) findViewById(R.id.view_divider_controls_startDrawableOffsetCheckBox);
+        mStartDrawableOffsetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mOnVisibilityChangeListener.onStartDrawableOffsetVisibilityChange();
+            }
+        });
+
         mEndOffsetCheckBox = (CheckBox) findViewById(R.id.view_divider_controls_endOffsetCheckBox);
         mEndOffsetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 mOnVisibilityChangeListener.onEndOffsetVisibilityChange();
+            }
+        });
+
+        mEndDrawableOffsetCheckBox = (CheckBox) findViewById(R.id.view_divider_controls_endDrawableOffsetCheckBox);
+        mEndDrawableOffsetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mOnVisibilityChangeListener.onEndDrawableOffsetVisibilityChange();
             }
         });
     }
@@ -58,6 +76,8 @@ public class DividerControlsView extends LinearLayout {
     public interface OnVisibilityChangeListener {
         void onDividerVisibilityChange();
         void onStartOffsetVisibilityChange();
+        void onStartDrawableOffsetVisibilityChange();
         void onEndOffsetVisibilityChange();
+        void onEndDrawableOffsetVisibilityChange();
     }
 }
