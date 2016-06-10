@@ -15,6 +15,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable mDivider;
     private int mOrientation;
+    private final int mLeftMargin;
+    private final int mRightMargin;
 
     /**
      * Sole constructor. Takes in a {@link Drawable} to be used as the interior
@@ -24,6 +26,22 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      */
     public DividerItemDecoration(Drawable divider) {
         mDivider = divider;
+        mLeftMargin = 0;
+        mRightMargin = 0;
+    }
+
+    /**
+     * Sole constructor. Takes in a {@link Drawable} to be used as the interior
+     * divider.
+     *
+     * @param divider A divider {@code Drawable} to be drawn on the RecyclerView
+     * @param leftMargin Left margin of a divider
+     * @param rightMargin Right margin of a divider
+     */
+    public DividerItemDecoration(Drawable divider, int leftMargin, int rightMargin) {
+        mDivider = divider;
+        mLeftMargin = leftMargin;
+        mRightMargin = rightMargin;
     }
 
     /**
@@ -87,8 +105,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
-            int parentLeft = child.getRight() + params.rightMargin;
-            int parentRight = parentLeft + mDivider.getIntrinsicWidth();
+            int parentLeft = mLeftMargin + child.getRight() + params.rightMargin;
+            int parentRight = mRightMargin + parentLeft + mDivider.getIntrinsicWidth();
 
             mDivider.setBounds(parentLeft, parentTop, parentRight, parentBottom);
             mDivider.draw(canvas);
@@ -105,8 +123,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      *               added
      */
     private void drawVerticalDividers(Canvas canvas, RecyclerView parent) {
-        int parentLeft = parent.getPaddingLeft();
-        int parentRight = parent.getWidth() - parent.getPaddingRight();
+        int parentLeft = mLeftMargin + parent.getPaddingLeft();
+        int parentRight = mRightMargin + parent.getWidth() - parent.getPaddingRight();
 
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount - 1; i++) {
