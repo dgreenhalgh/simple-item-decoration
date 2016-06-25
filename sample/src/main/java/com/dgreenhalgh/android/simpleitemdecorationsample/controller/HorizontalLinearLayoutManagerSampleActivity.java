@@ -14,15 +14,16 @@ import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
 import com.dgreenhalgh.android.simpleitemdecoration.linear.EndOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.StartOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecorationsample.R;
-import com.dgreenhalgh.android.simpleitemdecorationsample.model.SampleDataBank;
-import com.dgreenhalgh.android.simpleitemdecorationsample.view.DividerControlsView;
+import com.dgreenhalgh.android.simpleitemdecorationsample.two.SampleDataBank;
+import com.dgreenhalgh.android.simpleitemdecorationsample.two.SimpleItemDecorationSampleListAdapter;
+import com.dgreenhalgh.android.simpleitemdecorationsample.view.ControlView;
 
 import java.util.List;
 
 
 public class HorizontalLinearLayoutManagerSampleActivity extends ActionBarActivity {
 
-    private DividerControlsView mDividerControlsView;
+    private ControlView mControlView;
     private RecyclerView mRecyclerView;
     private RecyclerView.ItemDecoration mDividerItemDecoration;
     private RecyclerView.ItemDecoration mStartOffsetItemDecoration;
@@ -45,8 +46,8 @@ public class HorizontalLinearLayoutManagerSampleActivity extends ActionBarActivi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horizontal_linear_layout_manager_sample);
 
-        mDividerControlsView = (DividerControlsView) findViewById(R.id.activity_horizontal_linear_layout_manager_sample_dividerControlsView);
-        mDividerControlsView.setOnVisibilityChangeListener(mOnVisibilityChangeListener);
+        mControlView = (ControlView) findViewById(R.id.activity_horizontal_linear_layout_manager_sample_dividerControlsView);
+        mControlView.setItemDecorationVisibilityChangeListener(mItemDecorationVisibilityChangeListener);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.activity_horizontal_linear_layout_manager_sample_recyclerView);
         initRecyclerView();
@@ -62,13 +63,13 @@ public class HorizontalLinearLayoutManagerSampleActivity extends ActionBarActivi
         mDividerItemDecoration = new DividerItemDecoration(dividerDrawable);
 
         Resources resources = getResources();
-        int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
-        mStartOffsetItemDecoration = new StartOffsetItemDecoration(startOffsetPx);
+//        int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
+//        mStartOffsetItemDecoration = new StartOffsetItemDecoration(startOffsetPx);
 
         mStartDrawableOffsetItemDecoration = new StartOffsetItemDecoration(dividerDrawable);
 
-        int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
-        mEndOffsetItemDecoration = new EndOffsetItemDecoration(endOffsetPx);
+//        int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
+//        mEndOffsetItemDecoration = new EndOffsetItemDecoration(endOffsetPx);
 
         mEndDrawableOffsetItemDecoration = new EndOffsetItemDecoration(dividerDrawable);
     }
@@ -123,7 +124,7 @@ public class HorizontalLinearLayoutManagerSampleActivity extends ActionBarActivi
         }
     }
 
-    private DividerControlsView.OnVisibilityChangeListener mOnVisibilityChangeListener = new DividerControlsView.OnVisibilityChangeListener() {
+    private ControlView.ItemDecorationVisibilityChangeListener mItemDecorationVisibilityChangeListener = new ControlView.ItemDecorationVisibilityChangeListener() {
         @Override
         public void onDividerVisibilityChange() {
             toggleDividerVisibility();
@@ -134,19 +135,19 @@ public class HorizontalLinearLayoutManagerSampleActivity extends ActionBarActivi
             toggleStartOffsetVisibility();
         }
 
-        @Override
-        public void onStartDrawableOffsetVisibilityChange() {
-            toggleStartDrawableOffsetVisibility();
-        }
+//        @Override
+//        public void onStartDrawableOffsetVisibilityChange() {
+//            toggleStartDrawableOffsetVisibility();
+//        }
 
         @Override
         public void onEndOffsetVisibilityChange() {
             toggleEndOffsetVisibility();
         }
 
-        @Override
-        public void onEndDrawableOffsetVisibilityChange() {
-            toggleEndDrawableOffsetVisibility();
-        }
+//        @Override
+//        public void onEndDrawableOffsetVisibilityChange() {
+//            toggleEndDrawableOffsetVisibility();
+//        }
     };
 }

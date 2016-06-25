@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample.model;
+package com.dgreenhalgh.android.simpleitemdecorationsample.two;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,5 +24,4 @@ public class SampleDataBank {
 
         return sampleStringList;
     }
-
 }

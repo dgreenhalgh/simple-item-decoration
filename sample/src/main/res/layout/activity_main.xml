@@ -8,26 +8,30 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/activity_main_samplesHeader"/>
+        android:text="@string/samples"/>
 
     <Button
-        android:id="@+id/activity_main_verticalLinearLayoutManagerButton"
+        android:id="@+id/vertical_linear_layout_manager_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/activity_main_verticalLinearLayoutManagerButtonText"/>
+        android:text="@string/vertical_linear_layout_manager"/>
 
     <Button
-        android:id="@+id/activity_main_horizontalLinearLayoutManagerButton"
+        android:id="@+id/horizontal_linear_layout_manager_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/activity_main_horizontalLinearLayoutManagerButtonText"/>
+        android:text="@string/horizontal_linear_layout_manager"/>
 
     <Button
-        android:id="@+id/activity_main_gridLayoutManagerButton"
+        android:id="@+id/vertical_grid_layout_manager_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/activity_main_gridLayoutManagerButtonText"/>
+        android:text="@string/vertical_grid_layout_manager"/>
 
-
+    <Button
+        android:id="@+id/horizontal_grid_layout_manager_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/horizontal_grid_layout_manager"/>
 
 </LinearLayout>

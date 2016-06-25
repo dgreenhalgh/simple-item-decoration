@@ -1,9 +1,14 @@
 <resources>
-    <dimen name="start_offset">16dp</dimen>
-    <dimen name="end_offset">16dp</dimen>
+    <!--<dimen name="offset_size">16dp</dimen>-->
+    <!--<dimen name="end_offset">16dp</dimen>-->
     <dimen name="divider_size">8dp</dimen>
 
     <dimen name="activity_main_layout_margin">16dp</dimen>
     <dimen name="activity_horizontal_linear_layout_manager_sample_recyclerViewWidth">80dp</dimen>
+
+    <dimen name="list_item_sample_width">96dp</dimen>
+    <dimen name="list_item_sample_height">48dp</dimen>
     <dimen name="list_item_sample_text_padding">8dp</dimen>
+
+    <dimen name="padding_small">8dp</dimen>
 </resources>

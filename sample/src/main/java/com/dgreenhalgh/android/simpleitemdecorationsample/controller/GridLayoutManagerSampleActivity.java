@@ -14,8 +14,9 @@ import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecorati
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridBottomOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridTopOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecorationsample.R;
-import com.dgreenhalgh.android.simpleitemdecorationsample.model.SampleDataBank;
-import com.dgreenhalgh.android.simpleitemdecorationsample.view.DividerControlsView;
+import com.dgreenhalgh.android.simpleitemdecorationsample.two.SampleDataBank;
+import com.dgreenhalgh.android.simpleitemdecorationsample.two.SimpleItemDecorationSampleListAdapter;
+import com.dgreenhalgh.android.simpleitemdecorationsample.view.ControlView;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
 
     private static final int NUM_COLUMNS = 3;
 
-    private DividerControlsView mDividerControlsView;
+    private ControlView mControlView;
     private RecyclerView mRecyclerView;
     private RecyclerView.ItemDecoration mDividerItemDecoration;
     private RecyclerView.ItemDecoration mStartOffsetItemDecoration;
@@ -47,8 +48,8 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_layout_manager_sample);
 
-        mDividerControlsView = (DividerControlsView) findViewById(R.id.activity_grid_layout_manager_sample_dividerControlsView);
-        mDividerControlsView.setOnVisibilityChangeListener(mOnVisibilityChangeListener);
+        mControlView = (ControlView) findViewById(R.id.activity_grid_layout_manager_sample_dividerControlsView);
+        mControlView.setItemDecorationVisibilityChangeListener(mItemDecorationVisibilityChangeListener);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.activity_grid_layout_manager_sample_recyclerView);
         initRecyclerView();
@@ -64,13 +65,13 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         mDividerItemDecoration = new GridDividerItemDecoration(dividerDrawable, dividerDrawable, NUM_COLUMNS);
 
         Resources resources = getResources();
-        int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
-        mStartOffsetItemDecoration = new GridTopOffsetItemDecoration(startOffsetPx, NUM_COLUMNS);
+//        int startOffsetPx = resources.getDimensionPixelOffset(R.dimen.start_offset);
+//        mStartOffsetItemDecoration = new GridTopOffsetItemDecoration(startOffsetPx, NUM_COLUMNS);
 
         mStartDrawableOffsetItemDecoration = new GridTopOffsetItemDecoration(dividerDrawable, NUM_COLUMNS);
 
-        int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
-        mEndOffsetItemDecoration = new GridBottomOffsetItemDecoration(endOffsetPx, NUM_COLUMNS);
+//        int endOffsetPx = resources.getDimensionPixelOffset(R.dimen.end_offset);
+//        mEndOffsetItemDecoration = new GridBottomOffsetItemDecoration(endOffsetPx, NUM_COLUMNS);
 
         mEndDrawableOffsetItemDecoration = new GridBottomOffsetItemDecoration(dividerDrawable, NUM_COLUMNS);
     }
@@ -125,7 +126,7 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
         }
     }
 
-    private DividerControlsView.OnVisibilityChangeListener mOnVisibilityChangeListener = new DividerControlsView.OnVisibilityChangeListener() {
+    private ControlView.ItemDecorationVisibilityChangeListener mItemDecorationVisibilityChangeListener = new ControlView.ItemDecorationVisibilityChangeListener() {
         @Override
         public void onDividerVisibilityChange() {
             toggleDividerVisibility();
@@ -136,19 +137,19 @@ public class GridLayoutManagerSampleActivity extends ActionBarActivity {
             toggleStartOffsetVisibility();
         }
 
-        @Override
-        public void onStartDrawableOffsetVisibilityChange() {
-            toggleStartDrawableOffsetVisibility();
-        }
+//        @Override
+//        public void onStartDrawableOffsetVisibilityChange() {
+//            toggleStartDrawableOffsetVisibility();
+//        }
 
         @Override
         public void onEndOffsetVisibilityChange() {
             toggleEndOffsetVisibility();
         }
 
-        @Override
-        public void onEndDrawableOffsetVisibilityChange() {
-            toggleEndDrawableOffsetVisibility();
-        }
+//        @Override
+//        public void onEndDrawableOffsetVisibilityChange() {
+//            toggleEndDrawableOffsetVisibility();
+//        }
     };
 }
