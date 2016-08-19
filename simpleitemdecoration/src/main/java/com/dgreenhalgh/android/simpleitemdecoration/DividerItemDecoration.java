@@ -10,9 +10,7 @@ import android.view.View;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
-    private Drawable divider;
-
-    private int offsetPx;
+    private boolean dividerIsDrawable;
 
     private Drawable horizontalDivider;
     private Drawable verticalDivider;
@@ -27,7 +25,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      * @param divider A divider {@code Drawable} to be drawn onto the RecyclerView
      */
     public DividerItemDecoration(Drawable divider) {
-        this.divider = divider;
+        horizontalDivider = divider;
+        verticalDivider = divider;
+        dividerIsDrawable = true;
     }
 
     /**
@@ -39,7 +39,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      *
      */
     public DividerItemDecoration(int offsetPx) {
-        this.offsetPx = offsetPx;
+        horizontalOffsetPx = offsetPx;
+        verticalOffsetPx = offsetPx;
+        dividerIsDrawable = false;
     }
 
     /**
@@ -54,6 +56,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public DividerItemDecoration(Drawable horizontalDivider, Drawable verticalDivider) {
         this.horizontalDivider = horizontalDivider;
         this.verticalDivider = verticalDivider;
+        dividerIsDrawable = true;
     }
 
     /**
@@ -68,22 +71,23 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public DividerItemDecoration(int horizontalOffsetPx, int verticalOffsetPx) {
         this.horizontalOffsetPx = horizontalOffsetPx;
         this.verticalOffsetPx = verticalOffsetPx;
+        dividerIsDrawable = false;
     }
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
 
-        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager(); // TODO: Test scroll direction
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             if (horizontalDivider == null
-                    || verticalDivider == null) { // TODO: Handle individual null case
+                    || verticalDivider == null) {
                 return;
             }
 
             drawDividersForGridLayout(c, parent);
         } else if (layoutManager instanceof LinearLayoutManager) {
-            if (divider == null) {
+            if (!dividerIsDrawable) {
                 return;
             }
 
@@ -120,7 +124,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int top = parent.getPaddingTop();
 
         View firstChild = parent.getChildAt(0);
-        int bottom = top + firstChild.getBottom(); // TODO: Should be plus top here?
+        int bottom = top + firstChild.getBottom();
 
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount - 1; i++) {
@@ -129,10 +133,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
             int left = child.getRight() + params.rightMargin;
-            int right = left + divider.getIntrinsicHeight();
+            int right = left + horizontalDivider.getIntrinsicHeight();
 
-            divider.setBounds(left, top, right, bottom);
-            divider.draw(canvas);
+            horizontalDivider.setBounds(left, top, right, bottom);
+            horizontalDivider.draw(canvas);
         }
     }
 
@@ -140,7 +144,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int left = parent.getPaddingLeft();
 
         View firstChild = parent.getChildAt(0);
-        int right = left + firstChild.getRight(); // TODO: Should be plus right here?
+        int right = left + firstChild.getRight();
 
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount - 1; i++) {
@@ -149,10 +153,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
             int top = child.getBottom() + params.bottomMargin;
-            int bottom = top + divider.getIntrinsicHeight();
+            int bottom = top + verticalDivider.getIntrinsicHeight();
 
-            divider.setBounds(left, top, right, bottom);
-            divider.draw(canvas);
+            verticalDivider.setBounds(left, top, right, bottom);
+            verticalDivider.draw(canvas);
         }
     }
 
@@ -162,19 +166,70 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
         int childCount = parent.getChildCount();
         int spanCount = ((GridLayoutManager) layoutManager).getSpanCount();
-        int rowCount = childCount / spanCount;
 
-        if (orientation == LinearLayoutManager.VERTICAL) {
-            drawHorizontalDividersForVerticalGridLayout(canvas, parent, childCount, rowCount, spanCount);
-            drawVerticalDividersForVerticalGridLayout(canvas, parent, rowCount, spanCount); // todo span count and row count behave differently depending on scroll position
-        } else if (orientation == LinearLayoutManager.HORIZONTAL) {
-            // TODO: drawHorizontalDividersForHorizontalGridLayout
-            // TODO: drawHorizontalDividersForVerticalGridLayout
+        if (orientation == LinearLayoutManager.HORIZONTAL) {
+            drawHorizontalDividersForHorizontalGridLayout(canvas, parent, childCount, spanCount);
+            drawVerticalDividersForHorizontalGridLayout(canvas, parent, childCount, spanCount);
+        } else if (orientation == LinearLayoutManager.VERTICAL) {
+            drawHorizontalDividersForVerticalGridLayout(canvas, parent, childCount, spanCount);
+            drawVerticalDividersForVerticalGridLayout(canvas, parent, childCount, spanCount);
+        }
+    }
+
+    private void drawHorizontalDividersForHorizontalGridLayout(Canvas canvas, RecyclerView parent,
+                                                               int childCount, int spanCount) {
+        int columnCount = (int) Math.ceil((double) childCount / (double) spanCount);
+
+        for (int i = spanCount; i < spanCount * columnCount; i += spanCount) {
+            int lastRowChildIndex;
+
+            if (i < spanCount * (columnCount - 1)) {
+                lastRowChildIndex = i + spanCount - 1;
+            } else {
+                lastRowChildIndex = i + spanCount - 2;
+            }
+
+            View firstRowChild = parent.getChildAt(i);
+            View lastRowChild = parent.getChildAt(lastRowChildIndex);
+
+            int top = firstRowChild.getTop();
+            int right = firstRowChild.getLeft();
+            int left = right - horizontalDivider.getIntrinsicHeight();
+            int bottom = lastRowChild.getBottom();
+
+            horizontalDivider.setBounds(left, top, right, bottom);
+            horizontalDivider.draw(canvas);
+        }
+    }
+
+    private void drawVerticalDividersForHorizontalGridLayout(Canvas canvas, RecyclerView parent,
+                                                             int childCount, int spanCount) {
+        int columnCount = (int) Math.ceil((double) childCount / (double) spanCount);
+        int rightmostChildIndex;
+
+        for (int i = 1; i < spanCount; i++) {
+            if (i == spanCount - 1) {
+                rightmostChildIndex = parent.getChildCount() - spanCount - 1;
+            } else {
+                rightmostChildIndex = i + (spanCount * (columnCount - 1));
+            }
+
+            View leftmostChild = parent.getChildAt(i);
+            View rightmostChild = parent.getChildAt(rightmostChildIndex);
+
+            int left = leftmostChild.getLeft();
+            int bottom = leftmostChild.getTop();
+            int top = bottom - verticalDivider.getIntrinsicHeight();
+            int right = rightmostChild.getRight();
+
+            verticalDivider.setBounds(left, top, right, bottom);
+            verticalDivider.draw(canvas);
         }
     }
 
     private void drawHorizontalDividersForVerticalGridLayout(Canvas canvas, RecyclerView parent,
-                                                             int childCount, int rowCount, int spanCount) {
+                                                             int childCount, int spanCount) {
+        int rowCount = childCount / spanCount;
         int lastRowChildCount = childCount % spanCount;
 
         for (int i = 1; i < spanCount; i++) {
@@ -198,29 +253,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-//    private void drawHorizontalDividersForHorizontalGridLayout(Canvas canvas, RecyclerView parent,
-//                                                             int childCount, int rowCount, int spanCount) {
-//        int lastRowChildCount = // todo
-//
-//        for (int i = 1; i < spanCount; i++) {
-//            // todo
-//
-//            View firstRowChild = parent.getChildAt(i);
-//            View lastRowChild = parent.getChildAt(lastRowChildIndex);
-//
-//            int top = firstRowChild.getTop();
-//            int right = firstRowChild.getLeft();
-//            int left = right - horizontalDivider.getIntrinsicHeight();
-//            int bottom = lastRowChild.getBottom();
-//
-//            horizontalDivider.setBounds(left, top, right, bottom);
-//            horizontalDivider.draw(canvas);
-//        }
-//    }
-
-    private void drawVerticalDividersForVerticalGridLayout(Canvas canvas, RecyclerView parent, int rowCount,
-                                                           int spanCount) {
+    private void drawVerticalDividersForVerticalGridLayout(Canvas canvas, RecyclerView parent,
+                                                           int childCount, int spanCount) {
         int rightmostChildIndex;
+        int rowCount = childCount / spanCount;
 
         for (int i = 1; i <= rowCount; i++) {
             if (i == rowCount) {
@@ -247,38 +283,49 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
             return;
         }
 
-        int orientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation(); // TODO: Set divider to hdiv or vdiv instead?
+        int orientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
         if (orientation == LinearLayoutManager.HORIZONTAL) {
-            if (offsetPx != 0) {
-                outRect.left = offsetPx;
-            } else if (divider != null) {
-                outRect.left = divider.getIntrinsicWidth();
+            if (dividerIsDrawable) {
+                outRect.left = horizontalDivider.getIntrinsicWidth();
+            } else {
+                outRect.left = horizontalOffsetPx;
             }
         } else if (orientation == LinearLayoutManager.VERTICAL) {
-            if (offsetPx != 0) {
-                outRect.top = offsetPx;
-            } else if (divider != null) {
-                outRect.top = divider.getIntrinsicHeight();
+            if (dividerIsDrawable) {
+                outRect.top = verticalDivider.getIntrinsicHeight();
+            } else {
+                outRect.top = verticalOffsetPx;
             }
         }
     }
 
     private void getItemOffsetsForGridLayout(Rect outRect, View view, RecyclerView parent, int spanCount) {
-        boolean childIsInFirstColumn = (parent.getChildAdapterPosition(view) % spanCount) == 0;
+        int orientation = ((GridLayoutManager) parent.getLayoutManager()).getOrientation();
+        boolean childIsInFirstColumn = false;
+        boolean childIsInFirstRow = false;
+
+        if (orientation == LinearLayoutManager.HORIZONTAL) {
+            int childCount = parent.getChildCount();
+            childIsInFirstColumn = childCount <= spanCount;
+            childIsInFirstRow = ((childCount - 1) % spanCount) == 0;
+        } else if (orientation == LinearLayoutManager.VERTICAL) {
+            childIsInFirstColumn = (parent.getChildAdapterPosition(view) % spanCount) == 0;
+            childIsInFirstRow = (parent.getChildAdapterPosition(view)) < spanCount;
+        }
+
         if (!childIsInFirstColumn) {
-            if (horizontalOffsetPx != 0) {
-                outRect.left = horizontalOffsetPx;
-            } else if (horizontalDivider != null) {
+            if (dividerIsDrawable) {
                 outRect.left = horizontalDivider.getIntrinsicWidth();
+            } else {
+                outRect.left = horizontalOffsetPx;
             }
         }
 
-        boolean childIsInFirstRow = (parent.getChildAdapterPosition(view)) < spanCount;
         if (!childIsInFirstRow) {
-            if (verticalOffsetPx != 0) {
-                outRect.top = verticalOffsetPx;
-            } else if (verticalDivider != null) {
+            if (dividerIsDrawable) {
                 outRect.top = verticalDivider.getIntrinsicHeight();
+            } else {
+                outRect.top = verticalOffsetPx;
             }
         }
     }
