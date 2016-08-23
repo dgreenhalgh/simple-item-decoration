@@ -10,8 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.dgreenhalgh.android.simpleitemdecoration.DividerItemDecoration;
+import com.dgreenhalgh.android.simpleitemdecoration.StartOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.linear.EndOffsetItemDecoration;
-import com.dgreenhalgh.android.simpleitemdecoration.linear.StartOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecorationsample.R;
 import com.dgreenhalgh.android.simpleitemdecorationsample.view.ControlView;
 
@@ -32,6 +32,7 @@ public class ContentActivity extends AppCompatActivity {
     private RecyclerView.ItemDecoration endOffsetItemDecoration;
 
     private boolean dividersVisible;
+    private boolean startOffsetVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,13 @@ public class ContentActivity extends AppCompatActivity {
 
         @Override
         public void onStartOffsetVisibilityChange() {
-
+            if (startOffsetVisible) {
+                recyclerView.removeItemDecoration(startOffsetItemDecoration);
+                startOffsetVisible = false;
+            } else {
+                recyclerView.addItemDecoration(startOffsetItemDecoration);
+                startOffsetVisible = true;
+            }
         }
 
 //        @Override
