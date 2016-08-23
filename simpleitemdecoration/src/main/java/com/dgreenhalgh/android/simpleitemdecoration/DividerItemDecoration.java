@@ -77,20 +77,14 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
+        if (!dividerIsDrawable) {
+            return;
+        }
 
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            if (horizontalDivider == null
-                    || verticalDivider == null) {
-                return;
-            }
-
             drawDividersForGridLayout(c, parent);
         } else if (layoutManager instanceof LinearLayoutManager) {
-            if (!dividerIsDrawable) {
-                return;
-            }
-
             int orientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
             if (orientation == LinearLayoutManager.HORIZONTAL) {
                 drawDividersForHorizontalLinearLayout(c, parent);
@@ -121,6 +115,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void drawDividersForHorizontalLinearLayout(Canvas canvas, RecyclerView parent) {
+        if (horizontalDivider == null) {
+            return;
+        }
+
         int top = parent.getPaddingTop();
 
         View firstChild = parent.getChildAt(0);
@@ -141,6 +139,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void drawDividersForVerticalLinearLayout(Canvas canvas, RecyclerView parent) {
+        if (verticalDivider == null) {
+            return;
+        }
+
         int left = parent.getPaddingLeft();
 
         View firstChild = parent.getChildAt(0);
@@ -178,6 +180,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private void drawHorizontalDividersForHorizontalGridLayout(Canvas canvas, RecyclerView parent,
                                                                int childCount, int spanCount) {
+        if (horizontalDivider == null) {
+            return;
+        }
+
         int columnCount = (int) Math.ceil((double) childCount / (double) spanCount);
 
         for (int i = spanCount; i < spanCount * columnCount; i += spanCount) {
@@ -204,6 +210,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private void drawVerticalDividersForHorizontalGridLayout(Canvas canvas, RecyclerView parent,
                                                              int childCount, int spanCount) {
+        if (verticalDivider == null) {
+            return;
+        }
+
         int columnCount = (int) Math.ceil((double) childCount / (double) spanCount);
         int rightmostChildIndex;
 
@@ -229,6 +239,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private void drawHorizontalDividersForVerticalGridLayout(Canvas canvas, RecyclerView parent,
                                                              int childCount, int spanCount) {
+        if (horizontalDivider == null) {
+            return;
+        }
+
         int rowCount = childCount / spanCount;
         int lastRowChildCount = childCount % spanCount;
 
@@ -255,6 +269,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private void drawVerticalDividersForVerticalGridLayout(Canvas canvas, RecyclerView parent,
                                                            int childCount, int spanCount) {
+        if (verticalDivider == null) {
+            return;
+        }
+
         int rightmostChildIndex;
         int rowCount = childCount / spanCount;
 
@@ -286,13 +304,17 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         int orientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
         if (orientation == LinearLayoutManager.HORIZONTAL) {
             if (dividerIsDrawable) {
-                outRect.left = horizontalDivider.getIntrinsicWidth();
+                if (horizontalDivider != null) {
+                    outRect.left = horizontalDivider.getIntrinsicWidth();
+                }
             } else {
                 outRect.left = horizontalOffsetPx;
             }
         } else if (orientation == LinearLayoutManager.VERTICAL) {
             if (dividerIsDrawable) {
-                outRect.top = verticalDivider.getIntrinsicHeight();
+                if (verticalDivider != null) {
+                    outRect.top = verticalDivider.getIntrinsicHeight();
+                }
             } else {
                 outRect.top = verticalOffsetPx;
             }
@@ -315,7 +337,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
         if (!childIsInFirstColumn) {
             if (dividerIsDrawable) {
-                outRect.left = horizontalDivider.getIntrinsicWidth();
+                if (horizontalDivider != null) {
+                    outRect.left = horizontalDivider.getIntrinsicWidth();
+                }
             } else {
                 outRect.left = horizontalOffsetPx;
             }
@@ -323,7 +347,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
         if (!childIsInFirstRow) {
             if (dividerIsDrawable) {
-                outRect.top = verticalDivider.getIntrinsicHeight();
+                if (verticalDivider != null) {
+                    outRect.top = verticalDivider.getIntrinsicHeight();
+                }
             } else {
                 outRect.top = verticalOffsetPx;
             }
