@@ -47,13 +47,13 @@ public class StartOffsetItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 
-        int firstRowMaxIndex = 0;
+        int firstSpanMaxIndex = 0;
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            firstRowMaxIndex = ((GridLayoutManager) layoutManager).getSpanCount() - 1;
+            firstSpanMaxIndex = ((GridLayoutManager) layoutManager).getSpanCount() - 1;
         }
 
-        if (parent.getChildAdapterPosition(view) > firstRowMaxIndex) {
+        if (parent.getChildAdapterPosition(view) > firstSpanMaxIndex) {
             return;
         }
 
