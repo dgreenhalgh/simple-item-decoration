@@ -85,7 +85,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         if (layoutManager instanceof GridLayoutManager) {
             drawDividersForGridLayout(c, parent);
         } else if (layoutManager instanceof LinearLayoutManager) {
-            int orientation = ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
+            int orientation = ((LinearLayoutManager) layoutManager).getOrientation();
             if (orientation == LinearLayoutManager.HORIZONTAL) {
                 drawDividersForHorizontalLinearLayout(c, parent);
             } else if (orientation == LinearLayoutManager.VERTICAL) {

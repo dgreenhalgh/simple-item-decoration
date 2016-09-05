@@ -1,5 +1,6 @@
 package com.dgreenhalgh.android.simpleitemdecoration;
 
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.GridLayoutManager;
@@ -68,7 +69,38 @@ public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private int getLastSpanMaxIndex(RecyclerView parent, RecyclerView.State state, int orientation) {
+    /**
+     * Draws horizontal or vertical offset onto the end of the parent
+     * RecyclerView.
+     *
+     * @param c The {@link Canvas} onto which an offset will be drawn
+     * @param parent The RecyclerView onto which an offset is being added
+     * @param state The current RecyclerView.State of the RecyclerView
+     */
+    @Override
+    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        super.onDraw(c, parent, state);
+        if (offsetDrawable == null) {
+            return;
+        }
+
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            // TODO
+        } else if (layoutManager instanceof LinearLayoutManager) {
+            int orientation = ((LinearLayoutManager) layoutManager).getOrientation();
+            if (orientation == LinearLayoutManager.HORIZONTAL) {
+                drawOffsetForHorizontalLinearLayout(c, parent);
+            } else if (orientation == LinearLayoutManager.VERTICAL) {
+                drawOffsetForVerticalLinearLayout(c, parent);
+            }
+        } else {
+            throw new UnsupportedOperationException("Simple ItemDecoration only supports " +
+                    "LinearLayoutManager and its children.");
+        }
+    }
+
+    private int getLastSpanMaxIndex(RecyclerView parent, RecyclerView.State state, int orientation) { // TODO: Remove orientation
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         int itemCount = state.getItemCount();
         int lastSpanMaxIndex = itemCount - 1;
@@ -96,5 +128,31 @@ public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
         }
 
         return lastRowChildCount;
+    }
+
+    private void drawOffsetForHorizontalLinearLayout(Canvas canvas, RecyclerView parent) {
+        int top = parent.getPaddingTop();
+        int bottom = parent.getHeight() - parent.getPaddingBottom();
+
+        View lastChild = parent.getChildAt(parent.getChildCount() - 1);
+        RecyclerView.LayoutParams lastChildLayoutParams = (RecyclerView.LayoutParams) lastChild.getLayoutParams();
+        int left = lastChild.getRight() + lastChildLayoutParams.rightMargin;
+        int right = left + offsetDrawable.getIntrinsicWidth();
+
+        offsetDrawable.setBounds(left, top, right, bottom);
+        offsetDrawable.draw(canvas);
+    }
+
+    private void drawOffsetForVerticalLinearLayout(Canvas canvas, RecyclerView parent) {
+        int left = parent.getPaddingLeft();
+        int right = parent.getWidth() - parent.getPaddingRight();
+
+        View lastChild = parent.getChildAt(parent.getChildCount() - 1);
+        RecyclerView.LayoutParams lastChildLayoutParams = (RecyclerView.LayoutParams) lastChild.getLayoutParams();
+        int top = lastChild.getBottom() + lastChildLayoutParams.bottomMargin;
+        int bottom = top + offsetDrawable.getIntrinsicHeight();
+
+        offsetDrawable.setBounds(left, top, right, bottom);
+        offsetDrawable.draw(canvas);
     }
 }
