@@ -15,8 +15,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable mDivider;
     private int mOrientation;
-    private final int mLeftMargin;
-    private final int mRightMargin;
+    private final int mLeftInset;
+    private final int mRightInset;
 
     /**
      * Sole constructor. Takes in a {@link Drawable} to be used as the interior
@@ -26,8 +26,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      */
     public DividerItemDecoration(Drawable divider) {
         mDivider = divider;
-        mLeftMargin = 0;
-        mRightMargin = 0;
+        mLeftInset = 0;
+        mRightInset = 0;
     }
 
     /**
@@ -35,13 +35,13 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      * divider.
      *
      * @param divider A divider {@code Drawable} to be drawn on the RecyclerView
-     * @param leftMargin Left margin of a divider
-     * @param rightMargin Right margin of a divider
+     * @param leftInset Left inset of a divider
+     * @param rightInset Right inset of a divider
      */
-    public DividerItemDecoration(Drawable divider, int leftMargin, int rightMargin) {
+    public DividerItemDecoration(Drawable divider, int leftInset, int rightInset) {
         mDivider = divider;
-        mLeftMargin = leftMargin;
-        mRightMargin = rightMargin;
+        mLeftInset = leftInset;
+        mRightInset = rightInset;
     }
 
     /**
@@ -105,8 +105,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
-            int parentLeft = mLeftMargin + child.getRight() + params.rightMargin;
-            int parentRight = mRightMargin + parentLeft + mDivider.getIntrinsicWidth();
+            int parentLeft = mLeftInset + child.getRight() + params.rightMargin;
+            int parentRight = mRightInset + parentLeft + mDivider.getIntrinsicWidth();
 
             mDivider.setBounds(parentLeft, parentTop, parentRight, parentBottom);
             mDivider.draw(canvas);
@@ -123,8 +123,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      *               added
      */
     private void drawVerticalDividers(Canvas canvas, RecyclerView parent) {
-        int parentLeft = mLeftMargin + parent.getPaddingLeft();
-        int parentRight = mRightMargin + parent.getWidth() - parent.getPaddingRight();
+        int parentLeft = mLeftInset + parent.getPaddingLeft();
+        int parentRight = mRightInset + parent.getWidth() - parent.getPaddingRight();
 
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount - 1; i++) {
