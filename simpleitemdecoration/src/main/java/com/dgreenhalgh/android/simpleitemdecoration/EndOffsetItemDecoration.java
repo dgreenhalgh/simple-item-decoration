@@ -86,13 +86,18 @@ public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
 
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            // TODO
+            drawOffsetForGridLayout(c, parent, state);
         } else if (layoutManager instanceof LinearLayoutManager) {
+            int lastVisibleIndex = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+            if (lastVisibleIndex < state.getItemCount() - 1) {
+                return;
+            }
+
             int orientation = ((LinearLayoutManager) layoutManager).getOrientation();
             if (orientation == LinearLayoutManager.HORIZONTAL) {
-                drawOffsetForHorizontalLinearLayout(c, parent);
+                drawOffsetForHorizontalLinearLayout(c, parent, state);
             } else if (orientation == LinearLayoutManager.VERTICAL) {
-                drawOffsetForVerticalLinearLayout(c, parent);
+                drawOffsetForVerticalLinearLayout(c, parent, state);
             }
         } else {
             throw new UnsupportedOperationException("Simple ItemDecoration only supports " +
@@ -122,19 +127,20 @@ public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
 //    }
 
     private int getLastSpanItemCount(int itemCount, int spanCount) { // TODO: Pull params in
-        int lastRowChildCount = itemCount % spanCount;
-        if (lastRowChildCount == 0) {
-            lastRowChildCount = spanCount;
+        int lastRowItemCount = itemCount % spanCount;
+        if (lastRowItemCount == 0) {
+            lastRowItemCount = spanCount;
         }
 
-        return lastRowChildCount;
+        return lastRowItemCount;
     }
 
-    private void drawOffsetForHorizontalLinearLayout(Canvas canvas, RecyclerView parent) {
+    private void drawOffsetForHorizontalLinearLayout(Canvas canvas, RecyclerView parent,
+                                                     RecyclerView.State state) {
         int top = parent.getPaddingTop();
         int bottom = parent.getHeight() - parent.getPaddingBottom();
 
-        View lastChild = parent.getChildAt(parent.getChildCount() - 1);
+        View lastChild = parent.getChildAt(state.getItemCount() - 1);
         RecyclerView.LayoutParams lastChildLayoutParams = (RecyclerView.LayoutParams) lastChild.getLayoutParams();
         int left = lastChild.getRight() + lastChildLayoutParams.rightMargin;
         int right = left + offsetDrawable.getIntrinsicWidth();
@@ -143,14 +149,80 @@ public class EndOffsetItemDecoration extends RecyclerView.ItemDecoration {
         offsetDrawable.draw(canvas);
     }
 
-    private void drawOffsetForVerticalLinearLayout(Canvas canvas, RecyclerView parent) {
+    private void drawOffsetForVerticalLinearLayout(Canvas canvas, RecyclerView parent,
+                                                   RecyclerView.State state) {
         int left = parent.getPaddingLeft();
         int right = parent.getWidth() - parent.getPaddingRight();
 
-        View lastChild = parent.getChildAt(parent.getChildCount() - 1);
+        LinearLayoutManager layoutManager = (LinearLayoutManager) parent.getLayoutManager();
+        View lastChild = parent.getChildAt(layoutManager.findLastVisibleItemPosition()); // TODO: No. getChildAt may not work
+//        View lastChild = parent.getChildAt(state.getItemCount() - 1);
         RecyclerView.LayoutParams lastChildLayoutParams = (RecyclerView.LayoutParams) lastChild.getLayoutParams();
         int top = lastChild.getBottom() + lastChildLayoutParams.bottomMargin;
         int bottom = top + offsetDrawable.getIntrinsicHeight();
+
+        offsetDrawable.setBounds(left, top, right, bottom);
+        offsetDrawable.draw(canvas);
+    }
+
+    private void drawOffsetForGridLayout(Canvas canvas, RecyclerView parent,
+                                         RecyclerView.State state) {
+        int itemCount = state.getItemCount();
+
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+        if (((LinearLayoutManager) layoutManager).findLastVisibleItemPosition() < itemCount) {
+            return;
+        }
+
+        int spanCount = ((GridLayoutManager) layoutManager).getSpanCount();
+        int orientation = ((GridLayoutManager) layoutManager).getOrientation();
+
+        if (orientation == LinearLayoutManager.HORIZONTAL) {
+            drawOffsetForHorizontalGridLayout(canvas, parent, itemCount, spanCount);
+        } else if (orientation == LinearLayoutManager.VERTICAL) {
+            drawOffsetForVerticalGridLayout(canvas, parent, itemCount, spanCount);
+        }
+    }
+
+    private void drawOffsetForHorizontalGridLayout(Canvas canvas, RecyclerView parent,
+                                                   int itemCount, int spanCount) {
+        int lastRowFirstChildIndex = itemCount - getLastSpanItemCount(itemCount, spanCount);
+
+        int top = parent.getTop();
+        int bottom = top + parent.getChildAt(itemCount - 1).getBottom();
+
+        int left = 0;
+        int right = 0;
+
+        for (int i = lastRowFirstChildIndex; i < itemCount; i++) { // TODO: Loop may be unnecessary
+            View child = parent.getChildAt(i);
+            left = child.getRight();
+            right = left + offsetDrawable.getIntrinsicWidth();
+        }
+
+
+
+//        int left = parent.getChildAt(lastRowFirstChildIndex).getRight();
+//        int right = left + offsetDrawable.getIntrinsicWidth();
+
+        offsetDrawable.setBounds(left, top, right, bottom);
+        offsetDrawable.draw(canvas);
+    }
+
+    private void drawOffsetForVerticalGridLayout(Canvas canvas, RecyclerView parent,
+                                                   int itemCount, int spanCount) {
+        int lastRowFirstChildIndex = itemCount - getLastSpanItemCount(itemCount, spanCount); // TODO: child vs. item consistency
+
+        int left = parent.getPaddingLeft();
+        int right = parent.getChildAt(itemCount - 1).getRight();
+        int top = 0;
+        int bottom = 0;
+
+        for (int i = lastRowFirstChildIndex; i < itemCount; i++) {
+            View child = parent.getChildAt(i);
+            top = child.getBottom();
+            bottom = top + offsetDrawable.getIntrinsicHeight();
+        }
 
         offsetDrawable.setBounds(left, top, right, bottom);
         offsetDrawable.draw(canvas);
