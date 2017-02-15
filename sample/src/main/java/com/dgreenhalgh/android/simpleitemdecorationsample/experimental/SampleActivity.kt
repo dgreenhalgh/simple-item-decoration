@@ -2,6 +2,7 @@ package com.dgreenhalgh.android.simpleitemdecorationsample.experimental
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -22,6 +23,7 @@ class SampleActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 //        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         val soid = StartOffsetItemDecoration(this, StartOffsetItemDecoration.VERTICAL)
+        soid.drawable = ContextCompat.getDrawable(this, R.drawable.divider_sample)
         recyclerView.addItemDecoration(soid)
     }
 }

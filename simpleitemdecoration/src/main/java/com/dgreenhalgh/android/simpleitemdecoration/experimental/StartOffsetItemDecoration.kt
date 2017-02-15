@@ -57,12 +57,34 @@ class StartOffsetItemDecoration(val context: Context, _orientation: Int) : Recyc
         }
     }
 
-    override fun onDraw(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
+
+        if (orientation == VERTICAL) {
+            drawVertical(c, parent)
+        } else {
+            drawHorizontal(c, parent)
+        }
     }
 
     private fun drawVertical(canvas: Canvas, parent: RecyclerView) {
+        canvas.save()
 
+        var left = 0
+        val top = 0
+        var right = parent.width
+        val bottom = drawable.intrinsicHeight
+
+        if (parent.clipToPadding) {
+            left = parent.paddingLeft
+            right = parent.width - parent.paddingRight
+            canvas.clipRect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
+        }
+
+        drawable.setBounds(left, top, right, bottom)
+        drawable.draw(canvas)
+
+        canvas.restore()
     }
 
     private fun drawHorizontal(canvas: Canvas, parent: RecyclerView) {
