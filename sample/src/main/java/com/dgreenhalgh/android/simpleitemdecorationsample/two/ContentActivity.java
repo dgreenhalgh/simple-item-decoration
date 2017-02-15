@@ -5,11 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.dgreenhalgh.android.simpleitemdecoration.DividerItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.EndOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecoration.StartOffsetItemDecoration;
 import com.dgreenhalgh.android.simpleitemdecorationsample.R;
@@ -27,7 +27,7 @@ public class ContentActivity extends AppCompatActivity {
     private Drawable dividerDrawable;
     private int offsetPx;
 
-    private RecyclerView.ItemDecoration dividerItemDecoration;
+    private DividerItemDecoration dividerItemDecoration;
     private RecyclerView.ItemDecoration startOffsetItemDecoration;
     private RecyclerView.ItemDecoration endOffsetItemDecoration;
 
@@ -116,14 +116,16 @@ public class ContentActivity extends AppCompatActivity {
         @Override
         public void onLinearLayoutManagerSelected() {
             recyclerView.setLayoutManager(new LinearLayoutManager(ContentActivity.this));
-            dividerItemDecoration = new DividerItemDecoration(dividerDrawable);
+            dividerItemDecoration = new DividerItemDecoration(ContentActivity.this, DividerItemDecoration.VERTICAL);
+            dividerItemDecoration.setDrawable(dividerDrawable);
             recyclerView.invalidateItemDecorations();
         }
 
         @Override
         public void onGridLayoutManagerSelected() {
             recyclerView.setLayoutManager(new GridLayoutManager(ContentActivity.this, SPAN_COUNT));
-            dividerItemDecoration = new DividerItemDecoration(dividerDrawable, dividerDrawable);
+            dividerItemDecoration = new DividerItemDecoration(ContentActivity.this, DividerItemDecoration.VERTICAL);
+            dividerItemDecoration.setDrawable(dividerDrawable);
             recyclerView.invalidateItemDecorations();
         }
     };
@@ -145,7 +147,7 @@ public class ContentActivity extends AppCompatActivity {
     private ControlView.OffsetTypeChangeListener offsetTypeChangeListener = new ControlView.OffsetTypeChangeListener() {
         @Override
         public void onDrawableSelected() {
-            dividerItemDecoration = new DividerItemDecoration(dividerDrawable); // TODO: Grid? maybe make the constructor handle both horiz and vert
+//            dividerItemDecoration = new DividerItemDecoration(dividerDrawable); // TODO: Grid? maybe make the constructor handle both horiz and vert
             startOffsetItemDecoration = new StartOffsetItemDecoration(dividerDrawable);
             endOffsetItemDecoration = new EndOffsetItemDecoration(dividerDrawable);
             recyclerView.invalidateItemDecorations(); // TODO: Figure out this reset. It's more than an invalidation.
@@ -153,7 +155,7 @@ public class ContentActivity extends AppCompatActivity {
 
         @Override
         public void onPixelSelected() {
-            dividerItemDecoration = new DividerItemDecoration(offsetPx);
+//            dividerItemDecoration = new DividerItemDecoration(offsetPx);
             startOffsetItemDecoration = new StartOffsetItemDecoration(offsetPx);
             endOffsetItemDecoration = new EndOffsetItemDecoration(offsetPx);
             recyclerView.invalidateItemDecorations(); // TODO: Figure out this reset. It's more than an invalidation.
