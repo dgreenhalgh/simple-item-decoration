@@ -20,9 +20,9 @@ class SampleActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recycler_view) as RecyclerView
         recyclerView.adapter = SampleAdapter(SampleDataBank.getSampleData()) // TODO: Replace
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 //        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        val soid = StartOffsetItemDecoration(this, StartOffsetItemDecoration.VERTICAL)
+        val soid = StartOffsetItemDecoration(this, StartOffsetItemDecoration.HORIZONTAL)
         soid.drawable = ContextCompat.getDrawable(this, R.drawable.divider_sample)
         recyclerView.addItemDecoration(soid)
     }

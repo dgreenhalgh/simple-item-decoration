@@ -88,6 +88,22 @@ class StartOffsetItemDecoration(val context: Context, _orientation: Int) : Recyc
     }
 
     private fun drawHorizontal(canvas: Canvas, parent: RecyclerView) {
+        canvas.save()
 
+        val left = 0
+        var top = 0
+        val right = drawable.intrinsicWidth
+        var bottom = parent.height
+
+        if (parent.clipToPadding) {
+            top = parent.paddingTop
+            bottom = parent.height - parent.paddingBottom
+            canvas.clipRect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
+        }
+
+        drawable.setBounds(left, top, right, bottom)
+        drawable.draw(canvas)
+
+        canvas.restore()
     }
 }
