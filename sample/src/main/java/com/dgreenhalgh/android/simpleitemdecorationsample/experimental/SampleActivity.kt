@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.dgreenhalgh.android.simpleitemdecoration.experimental.DividerItemDecoration
+import com.dgreenhalgh.android.simpleitemdecoration.experimental.EndOffsetItemDecoration
 import com.dgreenhalgh.android.simpleitemdecoration.experimental.StartOffsetItemDecoration
 import com.dgreenhalgh.android.simpleitemdecorationsample.R
 import com.dgreenhalgh.android.simpleitemdecorationsample.experimental.options.DecorType
@@ -35,7 +36,7 @@ class SampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sample)
 
         recyclerView = findViewById(R.id.recycler_view) as RecyclerView
-        recyclerView.adapter = SampleAdapter(SampleDataBank.getSampleData()) // TODO: Replace
+        recyclerView.adapter = SampleAdapter(SampleDataBank.getSampleData()) // TODO: Replace with Kotlin impl
 
         val orientation = setOrientation()
 
@@ -52,8 +53,10 @@ class SampleActivity : AppCompatActivity() {
                     itemDecoration = StartOffsetItemDecoration(this, orientation)
                     itemDecoration.drawable = ContextCompat.getDrawable(this, R.drawable.divider_sample)
                 }
-
-                // TODO: End offset
+                DecorType.END_OFFSET.name -> {
+                    itemDecoration = EndOffsetItemDecoration(this, orientation)
+                    itemDecoration.drawable = ContextCompat.getDrawable(this, R.drawable.divider_sample)
+                }
             }
 
             recyclerView.addItemDecoration(itemDecoration)
