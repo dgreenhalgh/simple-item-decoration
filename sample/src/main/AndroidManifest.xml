@@ -20,13 +20,22 @@
         <activity android:name=".controller.HorizontalLinearLayoutManagerSampleActivity"/>
         <activity android:name=".controller.GridLayoutManagerSampleActivity"/>
         <activity android:name=".two.ContentActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".experimental.SampleActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".experimental.SampleActivity">
+        <activity android:name=".experimental.options.OptionsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

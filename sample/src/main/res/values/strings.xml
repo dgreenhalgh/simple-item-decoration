@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">SimpleItemDecorationSample</string>
 
+    <string name="show_sample">Show Sample</string>
+
+
+
+
+
     <!-- MainActivity --> <!-- TODO: Change? -->
     <string name="samples">Samples</string>
     <string name="key">Key</string>
