@@ -33,13 +33,13 @@ class StartOffsetItemDecoration(val context: Context, _orientation: Int) : Recyc
     /**
      * [Drawable] to be used as a divider at the start of the [RecyclerView].
      */
-    var drawable: Drawable
+    var divider: Drawable
 
     init {
         orientation = _orientation
 
         val a: TypedArray = context.obtainStyledAttributes(ATTRS)
-        drawable = a.getDrawable(0)
+        divider = a.getDrawable(0)
         a.recycle()
     }
 
@@ -51,9 +51,9 @@ class StartOffsetItemDecoration(val context: Context, _orientation: Int) : Recyc
         }
 
         if (orientation == VERTICAL) {
-            outRect.set(0, drawable.intrinsicHeight, 0, 0)
+            outRect.set(0, divider.intrinsicHeight, 0, 0)
         } else {
-            outRect.set(drawable.intrinsicWidth, 0, 0, 0)
+            outRect.set(divider.intrinsicWidth, 0, 0, 0)
         }
     }
 
@@ -73,7 +73,7 @@ class StartOffsetItemDecoration(val context: Context, _orientation: Int) : Recyc
         var left = 0
         val top = 0
         var right = parent.width
-        val bottom = drawable.intrinsicHeight
+        val bottom = divider.intrinsicHeight
 
         if (parent.clipToPadding) {
             left = parent.paddingLeft
@@ -81,8 +81,8 @@ class StartOffsetItemDecoration(val context: Context, _orientation: Int) : Recyc
             canvas.clipRect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
         }
 
-        drawable.setBounds(left, top, right, bottom)
-        drawable.draw(canvas)
+        divider.setBounds(left, top, right, bottom)
+        divider.draw(canvas)
 
         canvas.restore()
     }
@@ -92,7 +92,7 @@ class StartOffsetItemDecoration(val context: Context, _orientation: Int) : Recyc
 
         val left = 0
         var top = 0
-        val right = drawable.intrinsicWidth
+        val right = divider.intrinsicWidth
         var bottom = parent.height
 
         if (parent.clipToPadding) {
@@ -101,8 +101,8 @@ class StartOffsetItemDecoration(val context: Context, _orientation: Int) : Recyc
             canvas.clipRect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
         }
 
-        drawable.setBounds(left, top, right, bottom)
-        drawable.draw(canvas)
+        divider.setBounds(left, top, right, bottom)
+        divider.draw(canvas)
 
         canvas.restore()
     }

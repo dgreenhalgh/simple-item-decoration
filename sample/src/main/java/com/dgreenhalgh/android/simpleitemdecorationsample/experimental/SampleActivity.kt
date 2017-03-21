@@ -47,15 +47,15 @@ class SampleActivity : AppCompatActivity() {
             when (decorType) {
                 DecorType.DIVIDER.name -> {
                     itemDecoration = DividerItemDecoration(this, orientation)
-                    // TODO: Set Drawable
+                    itemDecoration.divider = ContextCompat.getDrawable(this, R.drawable.divider_sample)
                 }
                 DecorType.START_OFFSET.name -> {
                     itemDecoration = StartOffsetItemDecoration(this, orientation)
-                    itemDecoration.drawable = ContextCompat.getDrawable(this, R.drawable.divider_sample)
+                    itemDecoration.divider = ContextCompat.getDrawable(this, R.drawable.divider_sample)
                 }
                 DecorType.END_OFFSET.name -> {
                     itemDecoration = EndOffsetItemDecoration(this, orientation)
-                    itemDecoration.drawable = ContextCompat.getDrawable(this, R.drawable.divider_sample)
+                    itemDecoration.divider = ContextCompat.getDrawable(this, R.drawable.divider_sample)
                 }
             }
 

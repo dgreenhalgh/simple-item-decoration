@@ -160,5 +160,5 @@ public class ContentActivity extends AppCompatActivity {
             endOffsetItemDecoration = new EndOffsetItemDecoration(offsetPx);
             recyclerView.invalidateItemDecorations(); // TODO: Figure out this reset. It's more than an invalidation.
         }
-    }; // TODO: Figure out pixel vs drawable vs layoutmanager
+    }; // TODO: Figure out pixel vs divider vs layoutmanager
 }

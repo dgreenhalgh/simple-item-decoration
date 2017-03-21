@@ -34,7 +34,7 @@ class EndOffsetItemDecoration(val context: Context, _orientation: Int) : Recycle
     /**
      * [Drawable] to be used as a divider at the end of the [RecyclerView].
      */
-    var drawable: Drawable
+    var divider: Drawable
 
     val bounds = Rect()
 
@@ -42,7 +42,7 @@ class EndOffsetItemDecoration(val context: Context, _orientation: Int) : Recycle
         orientation = _orientation
 
         val a: TypedArray = context.obtainStyledAttributes(ATTRS)
-        drawable = a.getDrawable(0)
+        divider = a.getDrawable(0)
         a.recycle()
     }
 
@@ -54,9 +54,9 @@ class EndOffsetItemDecoration(val context: Context, _orientation: Int) : Recycle
         }
 
         if (orientation == StartOffsetItemDecoration.VERTICAL) {
-            outRect.set(0, 0, 0, drawable.intrinsicHeight)
+            outRect.set(0, 0, 0, divider.intrinsicHeight)
         } else {
-            outRect.set(0, 0, drawable.intrinsicWidth, 0)
+            outRect.set(0, 0, divider.intrinsicWidth, 0)
         }
     }
 
@@ -87,10 +87,10 @@ class EndOffsetItemDecoration(val context: Context, _orientation: Int) : Recycle
         val lastChild = parent.getChildAt(parent.childCount - 1)
         parent.getDecoratedBoundsWithMargins(lastChild, bounds)
         val bottom = bounds.bottom + Math.round(ViewCompat.getTranslationY(lastChild))
-        val top = bottom - drawable.intrinsicHeight
+        val top = bottom - divider.intrinsicHeight
 
-        drawable.setBounds(left, top, right, bottom)
-        drawable.draw(canvas)
+        divider.setBounds(left, top, right, bottom)
+        divider.draw(canvas)
 
         canvas.restore()
     }
@@ -112,10 +112,10 @@ class EndOffsetItemDecoration(val context: Context, _orientation: Int) : Recycle
         val lastChild = parent.getChildAt(parent.childCount - 1)
         parent.getDecoratedBoundsWithMargins(lastChild, bounds)
         val right = bounds.right + Math.round(ViewCompat.getTranslationX(lastChild))
-        val left = right - drawable.intrinsicWidth
+        val left = right - divider.intrinsicWidth
 
-        drawable.setBounds(left, top, right, bottom)
-        drawable.draw(canvas)
+        divider.setBounds(left, top, right, bottom)
+        divider.draw(canvas)
 
         canvas.restore()
     }
