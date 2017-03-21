@@ -12,7 +12,6 @@ import com.dgreenhalgh.android.simpleitemdecoration.experimental.EndOffsetItemDe
 import com.dgreenhalgh.android.simpleitemdecoration.experimental.StartOffsetItemDecoration
 import com.dgreenhalgh.android.simpleitemdecorationsample.R
 import com.dgreenhalgh.android.simpleitemdecorationsample.experimental.options.DecorType
-import com.dgreenhalgh.android.simpleitemdecorationsample.two.SampleDataBank
 import java.util.*
 
 class SampleActivity : AppCompatActivity() {
@@ -36,7 +35,7 @@ class SampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sample)
 
         recyclerView = findViewById(R.id.recycler_view) as RecyclerView
-        recyclerView.adapter = SampleAdapter(SampleDataBank.getSampleData()) // TODO: Replace with Kotlin impl
+        recyclerView.adapter = SampleAdapter(SampleDataBank.getSampleData())
 
         val orientation = setOrientation()
 
