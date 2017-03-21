@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample.experimental
+package com.dgreenhalgh.android.simpleitemdecorationsample
 
 class SampleDataBank {
     companion object {

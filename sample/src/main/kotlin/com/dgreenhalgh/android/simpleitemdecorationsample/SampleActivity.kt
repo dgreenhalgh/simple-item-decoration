@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample.experimental
+package com.dgreenhalgh.android.simpleitemdecorationsample
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,7 @@ import com.dgreenhalgh.android.simpleitemdecoration.experimental.DividerItemDeco
 import com.dgreenhalgh.android.simpleitemdecoration.experimental.EndOffsetItemDecoration
 import com.dgreenhalgh.android.simpleitemdecoration.experimental.StartOffsetItemDecoration
 import com.dgreenhalgh.android.simpleitemdecorationsample.R
-import com.dgreenhalgh.android.simpleitemdecorationsample.experimental.options.DecorType
+import com.dgreenhalgh.android.simpleitemdecorationsample.options.DecorType
 import java.util.*
 
 class SampleActivity : AppCompatActivity() {
@@ -35,7 +35,7 @@ class SampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sample)
 
         recyclerView = findViewById(R.id.recycler_view) as RecyclerView
-        recyclerView.adapter = SampleAdapter(SampleDataBank.getSampleData())
+        recyclerView.adapter = SampleAdapter(SampleDataBank.Companion.getSampleData())
 
         val orientation = setOrientation()
 

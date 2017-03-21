@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample.experimental.options
+package com.dgreenhalgh.android.simpleitemdecorationsample.options
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import com.dgreenhalgh.android.simpleitemdecorationsample.R
-import com.dgreenhalgh.android.simpleitemdecorationsample.experimental.SampleActivity
+import com.dgreenhalgh.android.simpleitemdecorationsample.SampleActivity
 
 class OptionsActivity : AppCompatActivity() {
 

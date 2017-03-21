@@ -10,7 +10,7 @@ import android.support.v7.widget.LinearLayoutManager
 
 class DividerItemDecoration(context: Context, orientation: Int) : DividerItemDecoration(context, orientation) {
 
-    companion object { // TODO: Pull out
+    companion object {
         private val ATTRS = intArrayOf(android.R.attr.listDivider)
 
         val HORIZONTAL = LinearLayoutManager.HORIZONTAL

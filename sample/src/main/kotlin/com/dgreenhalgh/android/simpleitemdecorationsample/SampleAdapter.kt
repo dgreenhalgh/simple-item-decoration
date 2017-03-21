@@ -1,4 +1,4 @@
-package com.dgreenhalgh.android.simpleitemdecorationsample.experimental
+package com.dgreenhalgh.android.simpleitemdecorationsample
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

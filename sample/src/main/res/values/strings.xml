@@ -1,44 +1,10 @@
 <resources>
     <string name="app_name">SimpleItemDecorationSample</string>
 
-    <string name="show_sample">Show Sample</string>
-
-
-
-
-
-    <!-- MainActivity --> <!-- TODO: Change? -->
-    <string name="samples">Samples</string>
-    <string name="key">Key</string>
-    <string name="vertical_linear_layout_manager">Vertical LinearLayoutManager</string>
-    <string name="horizontal_linear_layout_manager">Horizontal LinearLayoutManager</string>
-    <string name="vertical_grid_layout_manager">Vertical GridLayoutManager</string>
-    <string name="horizontal_grid_layout_manager">Horizontal GridLayoutManager</string>
-
-    <!-- ControlView -->
     <string name="dividers">Dividers</string>
     <string name="start_offset">Start offset</string>
-    <string name="start_drawable_offset">Start drawable offset</string>
     <string name="end_offset">End offset</string>
-    <string name="end_drawable_offset">End drawable offset</string>
 
-    <string name="layout_manager">Layout Manager</string>
-    <string name="orientation">Orientation</string>
-    <string name="offset_type">Offset Type</string>
-
-    <string-array name="layout_managers">
-        <item>LinearLayoutManager</item>
-        <item>GridLayoutManager</item>
-    </string-array>
-
-    <string-array name="orientations">
-        <item>Horizontal</item>
-        <item>Vertical</item>
-    </string-array>
-
-    <string-array name="offset_types">
-        <item>Drawable</item>
-        <item>Pixel</item>
-    </string-array>
+    <string name="show_sample">Show Sample</string>
 
 </resources>
