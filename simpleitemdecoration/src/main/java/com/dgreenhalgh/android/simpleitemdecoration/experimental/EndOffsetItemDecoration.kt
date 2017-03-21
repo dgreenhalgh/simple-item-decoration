@@ -34,8 +34,10 @@ class EndOffsetItemDecoration(context: Context) : RecyclerView.ItemDecoration() 
         a.recycle()
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect?, view: View, parent: RecyclerView?, state: RecyclerView.State?) {
         super.getItemOffsets(outRect, view, parent, state)
+
+        if (parent == null) return
 
         if (parent.getChildAdapterPosition(view) < parent.adapter.itemCount - 1) {
             return
@@ -44,19 +46,19 @@ class EndOffsetItemDecoration(context: Context) : RecyclerView.ItemDecoration() 
         inferOrientation(parent)
 
         if (orientation == LinearLayoutManager.VERTICAL) {
-            outRect.set(0, 0, 0, divider.intrinsicHeight)
+            outRect?.set(0, 0, 0, divider.intrinsicHeight)
         } else {
-            outRect.set(0, 0, divider.intrinsicWidth, 0)
+            outRect?.set(0, 0, divider.intrinsicWidth, 0)
         }
     }
 
-    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDraw(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
         super.onDraw(c, parent, state)
 
         if (orientation == LinearLayoutManager.VERTICAL) {
-            drawVertical(c, parent)
+            drawVertical(c!!, parent!!)
         } else {
-            drawHorizontal(c, parent)
+            drawHorizontal(c!!, parent!!)
         }
     }
 

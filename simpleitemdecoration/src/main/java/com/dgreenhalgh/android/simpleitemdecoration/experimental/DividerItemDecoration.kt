@@ -30,8 +30,8 @@ class DividerItemDecoration(context: Context) : DividerItemDecoration(context, L
         a.recycle()
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        inferOrientation(parent)
+    override fun getItemOffsets(outRect: Rect?, view: View, parent: RecyclerView?, state: RecyclerView.State?) {
+        inferOrientation(parent!!)
         super.getItemOffsets(outRect, view, parent, state)
     }
 
