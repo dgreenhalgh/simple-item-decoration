@@ -37,6 +37,24 @@
 
     </LinearLayout>
 
+    <RadioGroup
+        android:id="@+id/layout_manager_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/horizontal_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/horizontal"/>
+
+        <RadioButton
+            android:id="@+id/vertical_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vertical"/>
+    </RadioGroup>
+
     <Button
         android:id="@+id/show_sample_button"
         android:layout_width="match_parent"

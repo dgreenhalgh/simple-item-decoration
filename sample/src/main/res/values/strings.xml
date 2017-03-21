@@ -7,4 +7,6 @@
 
     <string name="show_sample">Show Sample</string>
 
+    <string name="horizontal">Horizontal</string>
+    <string name="vertical">Vertical</string>
 </resources>

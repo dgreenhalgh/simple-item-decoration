@@ -2,19 +2,23 @@ package com.dgreenhalgh.android.simpleitemdecoration.experimental
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
 
-
-class DividerItemDecoration(context: Context, orientation: Int) : DividerItemDecoration(context, orientation) {
+/**
+ * Adds a divider to a [RecyclerView] using a [LinearLayoutManager] or its subclass.
+ * Infers orientation of parent [RecyclerView] and passes up to Android Standard
+ * [DividerItemDecoration] implementation.
+ */
+class DividerItemDecoration(context: Context) : DividerItemDecoration(context, LinearLayoutManager.VERTICAL) {
 
     companion object {
         private val ATTRS = intArrayOf(android.R.attr.listDivider)
-
-        val HORIZONTAL = LinearLayoutManager.HORIZONTAL
-        val VERTICAL = LinearLayoutManager.VERTICAL
     }
 
     var divider: Drawable = ShapeDrawable()
@@ -25,4 +29,14 @@ class DividerItemDecoration(context: Context, orientation: Int) : DividerItemDec
         divider = a.getDrawable(0)
         a.recycle()
     }
-} // TODO: Pass up inferred orientation?
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        inferOrientation(parent)
+        super.getItemOffsets(outRect, view, parent, state)
+    }
+
+    private fun inferOrientation(parent: RecyclerView) {
+        val orientation = (parent.layoutManager as LinearLayoutManager).orientation
+        setOrientation(orientation)
+    }
+}

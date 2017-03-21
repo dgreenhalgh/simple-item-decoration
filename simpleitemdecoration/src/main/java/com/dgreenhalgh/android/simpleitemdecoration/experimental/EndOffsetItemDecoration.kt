@@ -13,23 +13,13 @@ import android.view.View
 /**
  * Adds an offset to the end of a [RecyclerView] using a [LinearLayoutManager] or its subclass.
  */
-class EndOffsetItemDecoration(val context: Context, _orientation: Int) : RecyclerView.ItemDecoration() {
+class EndOffsetItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
     companion object {
         private val ATTRS = intArrayOf(android.R.attr.listDivider)
-
-        val HORIZONTAL = LinearLayoutManager.HORIZONTAL
-        val VERTICAL = LinearLayoutManager.VERTICAL
     }
 
-    private var orientation: Int = VERTICAL
-        set(value) {
-            if (value != HORIZONTAL && value != VERTICAL) {
-                throw IllegalArgumentException("Invalid orientation. It should be either HORIZONTAL or VERTICAL")
-            }
-
-            field = value
-        }
+    private var orientation: Int = LinearLayoutManager.VERTICAL
 
     /**
      * [Drawable] to be used as a divider at the end of the [RecyclerView].
@@ -39,8 +29,6 @@ class EndOffsetItemDecoration(val context: Context, _orientation: Int) : Recycle
     val bounds = Rect()
 
     init {
-        orientation = _orientation
-
         val a: TypedArray = context.obtainStyledAttributes(ATTRS)
         divider = a.getDrawable(0)
         a.recycle()
@@ -53,7 +41,9 @@ class EndOffsetItemDecoration(val context: Context, _orientation: Int) : Recycle
             return
         }
 
-        if (orientation == StartOffsetItemDecoration.VERTICAL) {
+        inferOrientation(parent)
+
+        if (orientation == LinearLayoutManager.VERTICAL) {
             outRect.set(0, 0, 0, divider.intrinsicHeight)
         } else {
             outRect.set(0, 0, divider.intrinsicWidth, 0)
@@ -63,11 +53,15 @@ class EndOffsetItemDecoration(val context: Context, _orientation: Int) : Recycle
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
 
-        if (orientation == StartOffsetItemDecoration.VERTICAL) {
+        if (orientation == LinearLayoutManager.VERTICAL) {
             drawVertical(c, parent)
         } else {
             drawHorizontal(c, parent)
         }
+    }
+
+    private fun inferOrientation(parent: RecyclerView) {
+        orientation = (parent.layoutManager as LinearLayoutManager).orientation
     }
 
     private fun drawVertical(canvas: Canvas, parent: RecyclerView) {

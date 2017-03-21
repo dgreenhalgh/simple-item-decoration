@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView
 import com.dgreenhalgh.android.simpleitemdecoration.experimental.DividerItemDecoration
 import com.dgreenhalgh.android.simpleitemdecoration.experimental.EndOffsetItemDecoration
 import com.dgreenhalgh.android.simpleitemdecoration.experimental.StartOffsetItemDecoration
-import com.dgreenhalgh.android.simpleitemdecorationsample.R
 import com.dgreenhalgh.android.simpleitemdecorationsample.options.DecorType
 import java.util.*
 
@@ -37,23 +36,23 @@ class SampleActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view) as RecyclerView
         recyclerView.adapter = SampleAdapter(SampleDataBank.Companion.getSampleData())
 
-        val orientation = setOrientation()
+        setOrientation()
 
         val decorTypes = intent.getStringArrayListExtra(EXTRA_DECOR_TYPE)
         for (decorType in decorTypes) {
-            var itemDecoration: RecyclerView.ItemDecoration = DividerItemDecoration(this, orientation)
+            var itemDecoration: RecyclerView.ItemDecoration = DividerItemDecoration(this)
 
             when (decorType) {
                 DecorType.DIVIDER.name -> {
-                    itemDecoration = DividerItemDecoration(this, orientation)
+                    itemDecoration = DividerItemDecoration(this)
                     itemDecoration.divider = ContextCompat.getDrawable(this, R.drawable.divider_sample)
                 }
                 DecorType.START_OFFSET.name -> {
-                    itemDecoration = StartOffsetItemDecoration(this, orientation)
+                    itemDecoration = StartOffsetItemDecoration(this)
                     itemDecoration.divider = ContextCompat.getDrawable(this, R.drawable.divider_sample)
                 }
                 DecorType.END_OFFSET.name -> {
-                    itemDecoration = EndOffsetItemDecoration(this, orientation)
+                    itemDecoration = EndOffsetItemDecoration(this)
                     itemDecoration.divider = ContextCompat.getDrawable(this, R.drawable.divider_sample)
                 }
             }
@@ -62,10 +61,8 @@ class SampleActivity : AppCompatActivity() {
         }
     }
 
-    private fun setOrientation(): Int {
+    private fun setOrientation() {
         val orientation = intent.getIntExtra(EXTRA_ORIENTATION, LinearLayoutManager.VERTICAL)
         recyclerView.layoutManager = LinearLayoutManager(this, orientation, false)
-
-        return orientation
     }
 }
