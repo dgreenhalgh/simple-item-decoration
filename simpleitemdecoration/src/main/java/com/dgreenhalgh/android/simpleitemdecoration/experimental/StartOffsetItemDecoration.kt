@@ -83,7 +83,6 @@ class StartOffsetItemDecoration(context: Context) : RecyclerView.ItemDecoration(
         val left = 0
         val top = 0
         val right = divider.intrinsicWidth
-
         val bottom = parent.height
 
         divider.setBounds(left, top, right, bottom)
