@@ -71,17 +71,11 @@ class EndOffsetItemDecoration(context: Context) : RecyclerView.ItemDecoration() 
 
         if (isLastVisibleChildLastAdapterPosition(parent)) return
 
-        var left = 0
-        var right = parent.width
-
-        if (parent.clipToPadding) {
-            left = parent.paddingLeft
-            right = parent.width - parent.paddingRight
-            canvas.clipRect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
-        }
-
         val lastChild = parent.getChildAt(parent.childCount - 1)
         parent.getDecoratedBoundsWithMargins(lastChild, bounds)
+
+        val left = 0
+        val right = parent.width
         val bottom = bounds.bottom + Math.round(ViewCompat.getTranslationY(lastChild))
         val top = bottom - divider.intrinsicHeight
 
@@ -96,17 +90,11 @@ class EndOffsetItemDecoration(context: Context) : RecyclerView.ItemDecoration() 
 
         if (isLastVisibleChildLastAdapterPosition(parent)) return
 
-        var top = 0
-        var bottom = parent.height
-
-        if (parent.clipToPadding) {
-            top = parent.paddingTop
-            bottom = parent.height - parent.paddingBottom
-            canvas.clipRect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
-        }
-
         val lastChild = parent.getChildAt(parent.childCount - 1)
         parent.getDecoratedBoundsWithMargins(lastChild, bounds)
+
+        val top = 0
+        val bottom = parent.height
         val right = bounds.right + Math.round(ViewCompat.getTranslationX(lastChild))
         val left = right - divider.intrinsicWidth
 

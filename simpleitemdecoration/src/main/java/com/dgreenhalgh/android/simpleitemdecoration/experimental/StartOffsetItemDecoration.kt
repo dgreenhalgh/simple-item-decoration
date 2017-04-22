@@ -66,16 +66,10 @@ class StartOffsetItemDecoration(context: Context) : RecyclerView.ItemDecoration(
     private fun drawVertical(canvas: Canvas, parent: RecyclerView) {
         canvas.save()
 
-        var left = 0
+        val left = 0
         val top = 0
-        var right = parent.width
+        val right = parent.width
         val bottom = divider.intrinsicHeight
-
-        if (parent.clipToPadding) {
-            left = parent.paddingLeft
-            right = parent.width - parent.paddingRight
-            canvas.clipRect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
-        }
 
         divider.setBounds(left, top, right, bottom)
         divider.draw(canvas)
@@ -87,15 +81,10 @@ class StartOffsetItemDecoration(context: Context) : RecyclerView.ItemDecoration(
         canvas.save()
 
         val left = 0
-        var top = 0
+        val top = 0
         val right = divider.intrinsicWidth
-        var bottom = parent.height
 
-        if (parent.clipToPadding) {
-            top = parent.paddingTop
-            bottom = parent.height - parent.paddingBottom
-            canvas.clipRect(parent.paddingLeft, top, parent.width - parent.paddingRight, bottom)
-        }
+        val bottom = parent.height
 
         divider.setBounds(left, top, right, bottom)
         divider.draw(canvas)
