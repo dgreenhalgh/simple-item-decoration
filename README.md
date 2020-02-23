@@ -1,16 +1,17 @@
 #SimpleItemDecoration
 
-**Currently in active development**
+**[DEPRECATED]**: This was a useful learning experience, but in the time since development on this project was active, there are new, preferred solutions in AndroidX like [androidx.recyclerview.widget.DividerItemDecoration](https://developer.android.com/reference/androidx/recyclerview/widget/DividerItemDecoration).
+Thank you for your support!
 
 **SimpleItemDecoration** is a simple library for adding dividers and offsets to Android's `RecyclerView` using `RecyclerView.ItemDecoration`.
 
 It can be used to add both interior dividers and start/end offsets to RecyclerViews using `LinearLayoutManager` or `GridLayoutManager`.
 
-###Usage
+### Usage
 
 All of the ItemDecorations included can be added to your RecyclerView by calling `RecyclerView#addItemDecoration()`, passing in your desired ItemDecoration as a parameter.
 
-####DividerItemDecoration
+#### DividerItemDecoration
 
 `DividerItemDecoration` is used to add interior dividers to a `RecyclerView` using a `LinearLayoutManager`. 
 
@@ -22,7 +23,7 @@ Drawable dividerDrawable = ContextCompat.getDrawable(this, R.drawable.divider_sa
 recyclerView.addItemDecoration(new DividerItemDecoration(dividerDrawable));
 ```
 
-####StartOffsetItemDecoration
+#### StartOffsetItemDecoration
 
 `StartOffsetItemDecoration` is used to add an offset to the start of a `RecyclerView` using a `LinearLayoutManager`. 
 If the `RecyclerView` is oriented vertically, the offset will be added to the top of the `RecyclerView`.
@@ -36,7 +37,7 @@ int offsetPx = 10;
 recyclerView.addItemDecoration(new StartOffsetItemDecoration(offsetPx));
 ```
 
-####EndOffsetItemDecoration
+#### EndOffsetItemDecoration
 
 `EndOffsetItemDecoration` is used to add an offset to the end of a `RecyclerView` using a `LinearLayoutManager`. 
 If the `RecyclerView` is oriented vertically, the offset will be added to the bottom of the `RecyclerView`.
@@ -50,7 +51,7 @@ int offsetPx = 10;
 recyclerView.addItemDecoration(new EndOffsetItemDecoration(offsetPx));
 ```
 
-####GridDividerItemDecoration
+#### GridDividerItemDecoration
 
 `GridDividerItemDecoration` is used to add interior dividers to a `RecyclerView` using a `GridLayoutManager`. 
 
@@ -64,7 +65,7 @@ int numColumns = 2;
 recyclerView.addItemDecoration(new GridDividerItemDecoration(horizontalDividerDrawable, verticalDividerDrawable, numColumns));
 ```
 
-####GridTopOffsetItemDecoration
+#### GridTopOffsetItemDecoration
 
 `GridTopOffsetItemDecoration` is used to add an offset to the top of a `RecyclerView` using a `GridLayoutManager`. 
 
@@ -77,7 +78,7 @@ int numColumns = 2;
 recyclerView.addItemDecoration(new GridTopOffsetItemDecoration(offsetPx, numColumns));
 ```
 
-####GridBottomOffsetItemDecoration
+#### GridBottomOffsetItemDecoration
 
 `GridBottomOffsetItemDecoration` is used to add an offset to the bottom of a `RecyclerView` using a `GridLayoutManager`. 
 
@@ -90,7 +91,7 @@ int numColumns = 2;
 recyclerView.addItemDecoration(new GridBottomOffsetItemDecoration(offsetPx, numColumns));
 ```
 
-###Project Setup
+### Project Setup
 
 Current development can be found at the following snapshot:
 ```gradle
@@ -107,7 +108,7 @@ allprojects {
 ```
 You can also clone the project and add it as a module to your project.
 
-###Contribute
+### Contribute
 
 Improvements/additions are encouraged. Clone the project with:
 
@@ -115,7 +116,7 @@ Improvements/additions are encouraged. Clone the project with:
 git clone https://github.com/bignerdranch/simple-item-decoration.git
 ```
 
-###License
+### License
 
 ```
 The MIT License
