@@ -1,4 +1,4 @@
-#SimpleItemDecoration
+# SimpleItemDecoration
 
 **[DEPRECATED]**: This was a useful learning experience, but in the time since development on this project was active, there are new, preferred solutions in AndroidX like [androidx.recyclerview.widget.DividerItemDecoration](https://developer.android.com/reference/androidx/recyclerview/widget/DividerItemDecoration).
 Thank you for your support!
