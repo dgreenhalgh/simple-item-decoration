@@ -15,6 +15,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable mDivider;
     private int mOrientation;
+    private final int mLeftInset;
+    private final int mRightInset;
 
     /**
      * Sole constructor. Takes in a {@link Drawable} to be used as the interior
@@ -24,6 +26,22 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      */
     public DividerItemDecoration(Drawable divider) {
         mDivider = divider;
+        mLeftInset = 0;
+        mRightInset = 0;
+    }
+
+    /**
+     * Sole constructor. Takes in a {@link Drawable} to be used as the interior
+     * divider.
+     *
+     * @param divider A divider {@code Drawable} to be drawn on the RecyclerView
+     * @param leftInset Left inset of a divider
+     * @param rightInset Right inset of a divider
+     */
+    public DividerItemDecoration(Drawable divider, int leftInset, int rightInset) {
+        mDivider = divider;
+        mLeftInset = leftInset;
+        mRightInset = rightInset;
     }
 
     /**
@@ -87,8 +105,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
-            int parentLeft = child.getRight() + params.rightMargin;
-            int parentRight = parentLeft + mDivider.getIntrinsicWidth();
+            int parentLeft = mLeftInset + child.getRight() + params.rightMargin;
+            int parentRight = mRightInset + parentLeft + mDivider.getIntrinsicWidth();
 
             mDivider.setBounds(parentLeft, parentTop, parentRight, parentBottom);
             mDivider.draw(canvas);
@@ -105,8 +123,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
      *               added
      */
     private void drawVerticalDividers(Canvas canvas, RecyclerView parent) {
-        int parentLeft = parent.getPaddingLeft();
-        int parentRight = parent.getWidth() - parent.getPaddingRight();
+        int parentLeft = mLeftInset + parent.getPaddingLeft();
+        int parentRight = mRightInset + parent.getWidth() - parent.getPaddingRight();
 
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount - 1; i++) {
